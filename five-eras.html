@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t})();</script>
+<title>The same shopper, five eras of personalization · Sujeet Mathew Jose</title>
+<meta name="description" content="From one-size-fits-all to the assistant era, replayed on a single product moment. With a working interactive demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F7F9FC;--card:#fff;--ink:#0B1526;--indigo:#2247D4;--deep:#16308F;--mist:#E1E8F4;--faint:#5A6A82;--wash:#EDF2FE;--note:#FFFBEA;--notebrd:#D9B441;--notetxt:#6B5900;--body:#33445C;--band:#FFFFFF;--navbg:rgba(250,251,252,.94);--inset:#FFFFFF}
+
+html[data-theme="dark"]{
+  --paper:#0A101E; --card:#111A30; --band:#0D1B2E; --ink:#E9EEF7; --body:#C4CEDE;
+  --indigo:#82A4FF; --deep:#B7C9FF; --mist:#26324B; --hair:#1B2540; --faint:#8C99AE;
+  --wash:#19233A; --navbg:rgba(12,18,32,.92); --inset:#E9EEF8;
+  --note:#2B2512; --notebrd:#8A7420; --notetxt:#D9C36A;
+}
+html[data-theme="dark"] .btn.primary{color:#0A101E}
+html[data-theme="dark"] .btn.primary:hover{color:#0A101E}
+html[data-theme="dark"] ::selection{color:#0A101E}
+html[data-theme="dark"] .pviz{background:var(--inset)}
+html[data-theme="dark"] .pviz img{filter:saturate(.96) brightness(.97)}
+html[data-theme="dark"] .era-stage{background:var(--inset)}
+html[data-theme="dark"] .mock{background:#fff}
+html[data-theme="dark"] .mock .m-row{color:#33445C}
+html[data-theme="dark"] .photo-frame img{box-shadow:0 20px 50px -22px rgba(0,0,0,.6)}
+.tbtn{background:none;border:1px solid var(--mist);border-radius:99px;width:34px;height:34px;color:var(--faint);cursor:pointer;font-size:15px;line-height:1;flex:none;margin-left:14px}
+.tbtn:hover{color:var(--indigo);border-color:var(--indigo)}
+*{margin:0;padding:0;box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:'Newsreader',Georgia,serif;font-size:19px;line-height:1.72;-webkit-font-smoothing:antialiased}
+::selection{background:var(--indigo);color:#fff}
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid rgba(34,71,212,.3)}
+a:hover{color:var(--deep)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+nav{position:sticky;top:0;z-index:50;background:rgba(250,251,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--mist)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
+nav a{font-family:'IBM Plex Mono',monospace;font-size:12px;border:none;color:var(--faint)}
+nav a:hover{color:var(--indigo)}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.wide{max-width:900px;margin:0 auto;padding:0 24px}
+article{padding:68px 0 96px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo);margin-bottom:16px}
+h1{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(32px,5vw,46px);letter-spacing:-.022em;line-height:1.08;margin-bottom:14px}
+.meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);margin-bottom:42px}
+h2{font-family:'Archivo',sans-serif;font-weight:600;font-size:24px;letter-spacing:-.012em;margin:44px 0 14px}
+p{margin-bottom:18px}
+.pull{border-left:3px solid var(--indigo);padding:6px 0 6px 22px;margin:28px 0;font-size:21px;font-style:italic;color:var(--deep);max-width:52ch}
+.slot{display:block;border:1.5px dashed var(--notebrd);background:var(--note);border-radius:8px;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--notetxt);margin:10px 0}
+.back{margin-top:56px}
+
+/* era machine */
+.era-wrap{margin:40px 0}
+.era-frame{background:var(--card);border:1px solid var(--mist);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(16,26,38,.04),0 14px 36px -18px rgba(34,71,212,.2)}
+.era-head{padding:20px 24px 0}
+.era-title{font-family:'Archivo',sans-serif;font-weight:600;font-size:15px;color:var(--faint)}
+.era-title b{color:var(--ink)}
+.era-tabs{display:flex;margin-top:14px;border-bottom:1px solid var(--mist);overflow-x:auto;scrollbar-width:none}
+.era-tabs::-webkit-scrollbar{display:none}
+.era-tab{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint);background:none;border:none;border-bottom:2px solid transparent;padding:12px 14px;cursor:pointer;white-space:nowrap}
+.era-tab .yr{display:block;font-size:10px;opacity:.7;margin-top:2px}
+.era-tab.active{color:var(--indigo);border-bottom-color:var(--indigo)}
+.era-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);min-height:300px}
+@media(max-width:760px){.era-body{grid-template-columns:1fr}}
+.era-copy{padding:24px;display:flex;flex-direction:column;justify-content:center}
+.era-copy h3{font-family:'Archivo',sans-serif;font-weight:600;font-size:20px;letter-spacing:-.01em;margin-bottom:8px}
+.era-copy p{font-size:15.5px;max-width:46ch;color:var(--body);margin-bottom:0}
+.era-copy .sys{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--indigo);margin-top:16px}
+.era-copy .sysline{font-size:14px;color:var(--faint);font-style:italic;margin-top:3px}
+.era-stage{background:var(--wash);border-left:1px solid var(--mist);padding:22px;display:flex;align-items:center;justify-content:center}
+@media(max-width:760px){.era-stage{border-left:none;border-top:1px solid var(--mist)}}
+.mock{width:100%;max-width:320px;background:#fff;border:1px solid var(--mist);border-radius:10px;padding:18px;box-shadow:0 6px 22px -12px rgba(16,26,38,.2);transition:transform .35s ease,opacity .35s ease}
+.mock.swap{opacity:0;transform:translateY(8px)}
+.mock .m-top{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;margin-bottom:12px}
+.m-prod{display:flex;gap:12px;align-items:center}
+.m-swatch{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,#D8B69B,#B98D6F);flex:none}
+.m-name{font-family:'Archivo',sans-serif;font-weight:600;font-size:14.5px;line-height:1.25}
+.m-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:3px}
+.m-row{margin-top:12px;font-size:13.5px;line-height:1.45;color:var(--body)}
+.m-chiprow{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.m-chip{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 8px;border-radius:99px;border:1px solid var(--mist);color:var(--faint)}
+.m-chip.on{border-color:var(--indigo);color:var(--indigo);background:var(--wash)}
+.m-bubble{margin-top:12px;background:var(--wash);border:1px solid var(--mist);border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.5}
+.m-bubble .who{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--indigo);display:block;margin-bottom:4px}
+.m-cta{margin-top:14px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--indigo);color:#fff;border-radius:6px;padding:9px}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a href="index.html">← Sujeet Mathew Jose</a><a href="index.html#blog">All writing</a><button id="themeToggle" class="tbtn" aria-label="Toggle dark mode" title="Toggle dark mode" style="margin-left:14px">◐</button></div></nav>
+<article>
+<div class="wrap">
+<p class="eyebrow">Personalization · Interactive essay</p>
+<h1>The same shopper, five eras of personalization</h1>
+<p class="meta">Sujeet Mathew Jose · July 2026 · Berlin</p>
+
+<p>I have spent eleven years building personalization into commerce products. The pattern I keep returning to is that personalization has a history, and each stage rewired what customers considered normal. We are at the start of the biggest rewiring yet, and most teams are still building for the previous stage.</p>
+
+<p>Rather than describe the stages, let me show them. Below is one product moment, a customer looking at a serum, replayed through five eras. Click through.</p>
+</div>
+
+<div class="wide era-wrap">
+  <div class="era-frame">
+    <div class="era-head">
+      <p class="era-title"><b>The same shopper, five eras.</b> Click the tabs.</p>
+      <div class="era-tabs" role="tablist" aria-label="Personalization eras">
+        <button class="era-tab active" role="tab" aria-selected="true" data-era="0">One-size-fits-all<span class="yr">era 1</span></button>
+        <button class="era-tab" role="tab" aria-selected="false" data-era="1">Customization<span class="yr">era 2</span></button>
+        <button class="era-tab" role="tab" aria-selected="false" data-era="2">Personalization<span class="yr">era 3</span></button>
+        <button class="era-tab" role="tab" aria-selected="false" data-era="3">Hyper-personalization<span class="yr">era 4</span></button>
+        <button class="era-tab" role="tab" aria-selected="false" data-era="4">The assistant era<span class="yr">era 5</span></button>
+      </div>
+    </div>
+    <div class="era-body">
+      <div class="era-copy">
+        <h3 id="era-h"></h3>
+        <p id="era-p"></p>
+        <p class="sys">What the system knows</p>
+        <p class="sysline" id="era-s"></p>
+      </div>
+      <div class="era-stage"><div class="mock" id="mock"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+<h2>Four refinements, then a break</h2>
+<p>Products began as one-size-fits-all. Everyone got the same thing, and the product's job was to be good enough for the average customer. Then came customization: the customer chooses the colour of the car, the retailer segments the catalogue. The system offers variants; the customer does the selecting work.</p>
+
+<p>Personalization inverted that. The system starts doing the work: your name on the screen, a wishlist that remembers, a basic profile that shapes what you see. Modest by today's standards, but it established the contract that the product should know you.</p>
+
+<p>Hyper-personalization added the insight that a customer is not one person. The same shopper is a different buyer in December than in July, different on payday, different when solving a gift. Serving her means variation, mood, season, and context, not a single best-guess recommendation repeated forever.</p>
+
+<p>Each stage refined the previous one. What is happening now is not a refinement. It is a change in what the customer thinks they are talking to.</p>
+
+<h2>The assistant is no longer judged as a chatbot</h2>
+<p>When a customer opens a shopping assistant in 2026, they do not benchmark it against the retail chatbots of 2022. They benchmark it against the frontier AI they use every day at work. The assistant stops being perceived as "the retailer's bot" and becomes a local representative of AI technology itself.</p>
+
+<p class="pull">Customers extend the assistant a suspension of disbelief. They arrive prepared to believe it can genuinely help, because the technology behind it visibly can.</p>
+
+<p>This is an enormous gift and an enormous debt. The gift: trust that retail interfaces spent two decades failing to earn is now extended up front, on credit. The debt: every failure is measured against the frontier. An assistant that misreads an undertone or recommends a product the customer returned last month does not read as "a chatbot being a chatbot." It reads as a broken promise made by AI itself, in your brand's voice.</p>
+
+<p>The adoption mechanics have a precedent. Office software moved from the workplace into personal life because people carried their working habits home. The same migration is underway with AI: people who use it at work all day are bringing chat, voice, and multimodal search into their personal shopping, with workplace-grade expectations attached.</p>
+
+<h2>Three pillars that survive the break</h2>
+<p>Underneath the shift, the jobs an assistant does remain stable. I think of them as three pillars.</p>
+
+<p><strong>Assurance.</strong> Task completion and purchase confidence. Does this shade match my undertone, will this arrive by Friday, is this compatible with what I own. Assurance customers have their own judgment; they want it confirmed with evidence. In beauty, where returns are often a wrong shade rather than a wrong product, assurance is directly measurable in return rates.</p>
+
+<p><strong>Advisor.</strong> The consultative mode, for customers who want to lean on the system's knowledge rather than direct it. "Build me a routine" rather than "confirm my choice." The advisor supplies judgment instead of confirming it, which makes it a different product with a different failure profile, even when it shares a text box with assurance.</p>
+
+<p><strong>Anticipator.</strong> The need surfaced before it's voiced. The swimwear purchase that should prompt a sun-care conversation. The foundation running out on a predictable schedule. Anticipation is where personalization compounds, and where trust is most fragile: without a consent model and visible customer control it reads as surveillance. The anticipator only works on top of trust the first two pillars have banked.</p>
+
+<h2>What I would build for</h2>
+<p>Three consequences follow for anyone building a commercial assistant today.</p>
+
+<p>First, evaluation is the product. When the assistant generates rationales and advice in fourteen languages for fourteen market cultures, "is this output good" becomes an adversarial evaluation problem. Plausible-but-wrong is the dominant failure mode, and no reviewer can read every output. The eval harness is where product judgment scales.</p>
+
+<p>Second, separate the modes. Assurance and advice look identical in a transcript and need opposite behaviours. A system that answers an assurance question with advisor confidence, or an advice question with a hedge, fails users it could have served.</p>
+
+<p>Third, spend the suspension of disbelief carefully. It is a one-time credit. The teams that win will treat customer trust as a balance, drawn down with every wrong answer and topped up with every moment of genuine assurance, and they will instrument it as carefully as they instrument conversion.</p>
+
+<span class="slot"><b>Your input</b>Closing paragraph in your own words. One opinionated sentence about what you want to build next beats any summary.</span>
+
+<p class="back"><a href="index.html#blog">← All writing</a></p>
+</div>
+</article>
+
+<script>
+const ERAS=[
+ {h:"Everyone gets the serum.",p:"The product is fixed; the customer adapts to it. The catalogue is the interface.",s:"Nothing about you.",
+  mock:`<div class="m-top"><span>PRODUCT PAGE</span><span>SKU 0001</span></div><div class="m-prod"><div class="m-swatch"></div><div><div class="m-name">Hydrating Serum</div><div class="m-sub">One formula · one shade story</div></div></div><div class="m-row">Suitable for all skin types. Bestseller.</div><div class="m-cta">Add to bag</div>`},
+ {h:"You choose the variant.",p:"The system offers options; the customer does the selecting work. Choice, but no memory.",s:"What you clicked, this session.",
+  mock:`<div class="m-top"><span>PRODUCT PAGE</span><span>SKU 0001-24</span></div><div class="m-prod"><div class="m-swatch"></div><div><div class="m-name">Hydrating Serum</div><div class="m-sub">Pick your variant</div></div></div><div class="m-chiprow"><span class="m-chip">15 ml</span><span class="m-chip on">30 ml</span><span class="m-chip">50 ml</span></div><div class="m-chiprow"><span class="m-chip on">Fragrance-free</span><span class="m-chip">Original</span></div><div class="m-cta">Add to bag</div>`},
+ {h:"The system knows your name.",p:"The product starts doing the work: a wishlist that remembers, a profile that shapes what you see.",s:"A name, a wishlist, a purchase history.",
+  mock:`<div class="m-top"><span>FOR ANNA</span><span>♡ SAVED</span></div><div class="m-prod"><div class="m-swatch"></div><div><div class="m-name">Hydrating Serum</div><div class="m-sub">On your wishlist since March</div></div></div><div class="m-row">Back in stock. Customers who bought your moisturiser also bought this.</div><div class="m-cta">Add to bag</div>`},
+ {h:"You are not one person.",p:"The same shopper is different in December than July, different on payday, different buying a gift. Variation, not one best guess.",s:"Mood, season, occasion, context. Many versions of you.",
+  mock:`<div class="m-top"><span>FOR ANNA · BERLIN</span><span>NOV · DRY AIR</span></div><div class="m-prod"><div class="m-swatch"></div><div><div class="m-name">Rich Recovery Serum</div><div class="m-sub">Your winter switch</div></div></div><div class="m-row">Heating season is rough on your skin type. Your summer serum is lighter; this one is for now.</div><div class="m-chiprow"><span class="m-chip on">winter routine</span><span class="m-chip">gift mode</span><span class="m-chip">payday picks</span></div><div class="m-cta">Add to bag</div>`},
+ {h:"The assistant answers before the catalogue.",p:"The customer benchmarks this against the frontier AI she uses at work, and extends it a suspension of disbelief that is both a gift and a debt.",s:"Everything above, plus the conversation. Judged against the frontier.",
+  mock:`<div class="m-top"><span>ASSISTANT</span><span>ANNA · 21:40</span></div><div class="m-bubble"><span class="who">Anna</span>Will this serum sit well under the foundation I bought last month?</div><div class="m-bubble"><span class="who">Assistant · assurance</span>Yes. It's water-based like your foundation, so no pilling. One caution: you returned a fragranced serum in May, and this one is fragrance-free.</div><div class="m-bubble"><span class="who">Assistant · anticipator</span>Your current bottle should run out around Jul 26. Want a reminder?</div>`}
+];
+const mock=document.getElementById('mock'),eh=document.getElementById('era-h'),ep=document.getElementById('era-p'),es=document.getElementById('era-s');
+const tabs=[...document.querySelectorAll('.era-tab')];
+function setEra(i){
+  tabs.forEach((t,j)=>{t.classList.toggle('active',i===j);t.setAttribute('aria-selected',i===j)});
+  mock.classList.add('swap');
+  setTimeout(()=>{eh.textContent=ERAS[i].h;ep.textContent=ERAS[i].p;es.textContent=ERAS[i].s;mock.innerHTML=ERAS[i].mock;mock.classList.remove('swap')},180);
+}
+tabs.forEach(t=>t.addEventListener('click',()=>setEra(+t.dataset.era)));
+eh.textContent=ERAS[0].h;ep.textContent=ERAS[0].p;es.textContent=ERAS[0].s;mock.innerHTML=ERAS[0].mock;
+
+const tt=document.getElementById('themeToggle');
+if(tt){tt.addEventListener('click',()=>{const r=document.documentElement;const n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}})}
+</script>
+</body>
+</html>
