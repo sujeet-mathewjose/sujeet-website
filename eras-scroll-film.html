@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five eras — scroll-film preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#15111B; --panel:#1D1725; --fg:#EFEAE4; --fg2:#B9B1BF; --fg3:#8B8394;
+    --line:rgba(239,234,228,.16); --acc:#6FD3A6; --accfg:#15111B; --shot:#F4F1EC; --shotfg:#1A1420;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--fg);font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+  /* ── context padding above/below, so this reads as "one section in a page" ── */
+  .ctx{padding:120px clamp(16px,4vw,40px);border-top:1px solid var(--line);text-align:center;color:var(--fg3);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+
+  /* ── the pinned scroll-film section ── */
+  #eras-film{ position:relative; height:700vh; } /* 100vh per slice; era 6 spans two slices (6a/6b) */
+  #eras-stage{
+    position:sticky; top:0; height:100vh; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:center;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+
+  /* Both chrome bars sit above scene content in stacking order AND get an opaque
+     backdrop band — needed because era 6's internally-scrolled content (mobile)
+     passes underneath them; a transparent kicker/rail would show scrolled text
+     bleeding through. Eras 1-5 never scroll internally, so this is a no-op for them. */
+  .film-kicker{
+    position:absolute; top:0; left:0; right:0; z-index:5;
+    padding:clamp(20px,4vh,40px) clamp(16px,4vw,40px) 14px;
+    background:linear-gradient(to bottom, var(--bg) 65%, transparent);
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg3);
+  }
+  .film-kicker .n{color:var(--acc)}
+
+  /* progress rail: 5 ticks, one lights up per era */
+  .rail{ position:absolute; bottom:0; left:0; right:0; z-index:5; padding:14px clamp(16px,4vw,40px) clamp(20px,5vh,44px); display:flex; gap:8px;}
+  .rail i{flex:1;height:3px;background:var(--line);display:block;position:relative;overflow:hidden}
+  .rail i b{position:absolute;inset:0;background:var(--acc);transform:scaleX(0);transform-origin:left;display:block}
+
+  .scene{
+    position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; align-items:center;
+    padding:76px clamp(16px,4vw,40px) 66px; opacity:0; will-change:opacity,transform;
+  }
+  .scene .copy{max-width:46ch}
+  .scene .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+  .scene h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(28px,4vw,52px);letter-spacing:-.04em;line-height:1.02;margin:0}
+  .scene p{margin:18px 0 0;font-size:17px;line-height:1.6;color:var(--fg2)}
+  .scene .knows{margin:28px 0 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
+  .scene .knows b{display:block;margin-top:8px;font-size:16px;letter-spacing:normal;text-transform:none;color:var(--fg);font-weight:500}
+
+  .mock{ justify-self:center; width:100%; max-width:340px; background:var(--panel); border:1px solid var(--line); padding:clamp(18px,3vw,28px)}
+  .mock .top{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.14em;color:var(--fg3);border-bottom:1px solid var(--line);padding-bottom:12px}
+  .mock .row{display:flex;gap:16px;align-items:center;padding:18px 0 16px;border-bottom:1px solid var(--line)}
+  .mock .swatch{width:46px;height:60px;background:var(--acc);opacity:.55;flex:none}
+  .mock .prod{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.02em}
+  .mock .sub{margin:5px 0 0;font-size:13px;color:var(--fg3)}
+  .mock .line{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--fg2)}
+
+  /* ── era 6 — the job-list panel. deliberately NOT a phone mock: no screen exists to look at ──
+     Copy here runs ~4x longer than eras 1-5, and the brief's reasoning-exchange deserves its own
+     beat, not a cramped footnote — so era 6 spans two scroll slices (6a, 6b) instead of one. */
+  --coral: #E8846A;
+  .scene.era6 .copy6{max-width:46ch}
+  .scene.era6 .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+  .scene.era6 h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(26px,3.6vw,46px);letter-spacing:-.035em;line-height:1.04;margin:0}
+  .scene.era6 p.body6{margin:16px 0 0;font-size:15.5px;line-height:1.58;color:var(--fg2)}
+  .scene.era6 .knows{margin:22px 0 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
+  .scene.era6 .knows b{display:block;margin-top:8px;font-size:15px;letter-spacing:normal;text-transform:none;color:var(--fg);font-weight:500;line-height:1.4}
+
+  .scene.era6{ align-items:start; }
+  .scene.era6 .copy6, .scene.era6 .joblist, .scene.era6 .exchange6{ margin-top:3vh; }
+  .joblist{ justify-self:center; width:100%; max-width:380px; background:var(--panel); border:1px solid var(--line); padding:clamp(16px,2.6vw,22px)}
+  .joblist .top{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.12em;color:var(--fg3);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:2px}
+  .jrow{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .jrow:last-of-type{border-bottom:none}
+  .jdot{width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--acc)}
+  .jrow.flagged .jdot{background:var(--coral)}
+  .jrow .jmeta{flex:1;min-width:0}
+  .jrow .jcat{display:block;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px}
+  .jrow .jlabel{display:block;font-size:14px;line-height:1.35;color:var(--fg)}
+  .jrow .jstatus{flex:none;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);white-space:nowrap;padding-top:1px}
+  .jrow.flagged .jstatus{color:var(--coral)}
+
+  /* 6b — the reasoning exchange gets its own full beat, large and legible */
+  .exchange6{ justify-self:center; width:100%; max-width:460px; }
+  .exchange6 .pill{border:1px solid var(--coral);background:rgba(232,132,106,.08);padding:clamp(16px,2.4vw,22px)}
+  .exchange6 .pill .tag{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
+  .exchange6 .pill .sys{margin:0;font-size:16.5px;line-height:1.5;color:var(--fg2)}
+  .exchange6 .pill .cust{margin:12px 0 0;font-size:18px;line-height:1.35;color:var(--acc);font-weight:500}
+  .caption6{margin:16px 0 0;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);text-align:center}
+  .talk6{margin:8px 0 0;font-size:13.5px;line-height:1.5;color:var(--fg2);text-align:center;max-width:42ch;margin-left:auto;margin-right:auto}
+
+  @media (max-width:760px){
+    .scene{grid-template-columns:1fr;gap:16px;padding-top:70px}
+    .scene .copy, .scene .copy6{max-width:none}
+    .mock, .joblist, .exchange6{max-width:320px}
+    /* era 6 alone carries more content than fits one small screen at readable
+       type — eras 1-5 don't need this, their copy is short by design. Let era 6
+       scroll internally rather than shrink text past legibility or clip content.
+       Bottom padding reserves space under the fixed, opaque-backed rail. */
+    .scene.era6{ overflow-y:auto; align-content:start; -webkit-overflow-scrolling:touch; padding-bottom:56px; }
+    .scene.era6 .copy6, .scene.era6 .joblist, .scene.era6 .exchange6{ margin-top:0; }
+    .scene.era6 .joblist, .scene.era6 .exchange6{ margin-bottom:8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ctx">↓ preceding page content ↓<br><span style="opacity:.5">(hero, credibility stats, case studies would sit here in the real page)</span></div>
+
+<section id="eras-film">
+  <div id="eras-stage">
+    <div class="film-kicker">
+      <span id="film-title">The same shopper, six eras of personalization</span>
+      <span><span class="n" id="era-n">01</span> / 06</span>
+    </div>
+
+    <!-- scenes injected by JS from ERAS data -->
+    <div id="scenes"></div>
+
+    <div class="rail" id="rail"></div>
+  </div>
+</section>
+
+<div class="ctx">↓ following page content ↓<br><span style="opacity:.5">(dissolves into "Selected work" as before)</span></div>
+
+<script>
+const ERAS = [
+  {name:"One-size-fits-all", h:"Everyone gets the serum.", p:"The product is fixed; the customer adapts to it. The catalogue is the interface.", s:"Nothing about you.", top:"PRODUCT PAGE", meta:"SKU 0001", prod:"Hydrating Serum", sub:"One formula", line:"Best seller. 4.2 ★ from 8,411 reviews."},
+  {name:"Customization", h:"You choose the variant.", p:"The system offers options; the customer does the selecting work. Choice, but no memory.", s:"What you clicked, this session.", top:"PRODUCT PAGE", meta:"SKU 0001-24", prod:"Hydrating Serum", sub:"Pick your strength", line:"Light · Medium · Rich — you decide which one is yours."},
+  {name:"Personalization", h:"The system knows your name.", p:"The product starts doing the work: a wishlist that remembers, a profile that shapes what you see.", s:"A name, a wishlist, a purchase history.", top:"FOR ANNA", meta:"♡ SAVED", prod:"Hydrating Serum", sub:"On your wishlist since March", line:"Because you bought the cleanser: reorder in 6 days?"},
+  {name:"Hyper-personalization", h:"You are not one person.", p:"The same shopper is different in December than in July, different on payday, different buying a gift. Variation, not one best guess.", s:"Mood, season, occasion, context.", top:"FOR ANNA · BERLIN", meta:"NOV · DRY AIR", prod:"Rich Recovery Serum", sub:"Swapped for the season", line:"Colder, drier week ahead. Heavier texture for now."},
+  {name:"The assistant era", h:"The assistant answers before the catalogue.", p:"The customer benchmarks this against the frontier AI she uses at work, and extends it a suspension of disbelief that is both a gift and a debt.", s:"Your skin, your routine, and what you actually asked.", top:"ASSISTANT", meta:"ANNA · 21:40", prod:"Barrier Repair Serum", sub:"Matched, with the reason", line:"“Will this sit under the foundation I bought last month?” Yes — and here is the one that layers better."}
+];
+
+// Era 6 — "Chief of staff." Structurally different by design (era6-build-spec.md):
+// no phone screen to mock, because era 6 is not customer-initiated. Two-column
+// job-list panel instead. Copy is the generalized version (era6-generalized-handoff.md) —
+// beauty is one category among four, not the whole idea.
+const ERA6 = {
+  name: "Chief of staff",
+  h: "The assistant plans. You approve the exceptions.",
+  p: "Era 5 answers what you ask. Era 6 decides what needs doing, does most of it quietly, and only interrupts you for the one thing it isn't sure is yours to decide alone. The same shape applies anywhere a customer has standing interests, not just one category: groceries that run out on a schedule, a flight that reprices, a subscription nobody's used in months, a wardrobe with a gap in it. In beauty specifically, it looks like reordering a cleanser before it runs out, flagging a serum that dropped in price, noticing a routine has no SPF in it — and pausing only when it wants to swap a formulation for a different one, because that's the one call that isn't purely operational.",
+  s: "Everything above, plus the standing goal: your interests, held and acted on without being asked.",
+  jobs: [
+    { cat: "Household", label: "Reorder: laundry detergent due Thu", flagged: false },
+    { cat: "Travel", label: "Price drop: flight to Lisbon −18%", flagged: false },
+    { cat: "Subscriptions", label: "Renewal: streaming plan unused 60 days", flagged: false },
+    { cat: "Beauty", label: "Swap to fragrance-free serum", flagged: true }
+  ],
+  exchange: {
+    sys: "Swap to fragrance-free? You returned a scented one in May.",
+    cust: "Do it."
+  },
+  caption: "Same intelligence. Who starts the work is what changes.",
+  talk: "This is the direction I want to build in next — autonomous, trustworthy customer agents that earn the right to act, not just answer. If you're working on this too, I'd like to talk."
+};
+
+const scenesEl = document.getElementById('scenes');
+const railEl = document.getElementById('rail');
+
+ERAS.forEach((e, i) => {
+  const scene = document.createElement('div');
+  scene.className = 'scene';
+  scene.dataset.i = i;
+  scene.innerHTML = `
+    <div class="copy">
+      <p class="eyebrow">Era ${i+1} · ${e.name}</p>
+      <h2>${e.h}</h2>
+      <p>${e.p}</p>
+      <p class="knows">What the system knows<b>${e.s}</b></p>
+    </div>
+    <div class="mock">
+      <div class="top"><span>${e.top}</span><span>${e.meta}</span></div>
+      <div class="row"><span class="swatch"></span><div><p class="prod">${e.prod}</p><p class="sub">${e.sub}</p></div></div>
+      <p class="line">${e.line}</p>
+    </div>
+  `;
+  scenesEl.appendChild(scene);
+
+  const tick = document.createElement('i');
+  tick.innerHTML = '<b></b>';
+  railEl.appendChild(tick);
+});
+
+// Era 6 — job-list panel, not a phone mock (deliberate, see ERA6 comment above).
+// Spans two scroll slices: 6a (headline + paragraph + job list) and 6b (the reasoning
+// exchange gets its own full beat — cramming it under the job list buried the one line
+// the brief calls load-bearing: "without this, a skeptical reader dismisses the whole
+// panel as just a push notification").
+(function(){
+  const jobsHtml = ERA6.jobs.map(j => `
+    <div class="jrow${j.flagged ? ' flagged' : ''}">
+      <span class="jdot"></span>
+      <div class="jmeta"><span class="jcat">${j.cat}</span><span class="jlabel">${j.label}</span></div>
+      <span class="jstatus">${j.flagged ? 'flagged' : 'resolved'}</span>
+    </div>`).join('');
+
+  const scene6a = document.createElement('div');
+  scene6a.className = 'scene era6';
+  scene6a.dataset.i = 5;
+  scene6a.innerHTML = `
+    <div class="copy6">
+      <p class="eyebrow">Era 6 · ${ERA6.name}</p>
+      <h2>${ERA6.h}</h2>
+      <p class="body6">${ERA6.p}</p>
+      <p class="knows">What the system knows<b>${ERA6.s}</b></p>
+    </div>
+    <div class="joblist">
+      <div class="top"><span>SELF-GENERATED JOBS</span><span>3 resolved · 1 flagged</span></div>
+      ${jobsHtml}
+    </div>
+  `;
+  scenesEl.appendChild(scene6a);
+
+  const scene6b = document.createElement('div');
+  scene6b.className = 'scene era6';
+  scene6b.dataset.i = 6;
+  scene6b.innerHTML = `
+    <div class="copy6">
+      <p class="eyebrow">Era 6 · ${ERA6.name}</p>
+      <h2>Reasoning shown, not just a request made.</h2>
+      <p class="body6">The flagged job doesn't just ask — it explains itself first. That's what separates a chief of staff from a push notification wearing a nicer font.</p>
+    </div>
+    <div class="exchange6">
+      <div class="pill">
+        <span class="tag">Beauty · flagged</span>
+        <p class="sys">${ERA6.exchange.sys}</p>
+        <p class="cust">“${ERA6.exchange.cust}”</p>
+      </div>
+      <p class="caption6">${ERA6.caption}</p>
+      <p class="talk6">${ERA6.talk}</p>
+    </div>
+  `;
+  scenesEl.appendChild(scene6b);
+
+  const tick = document.createElement('i');
+  tick.innerHTML = '<b></b>';
+  railEl.appendChild(tick);
+})();
+
+const scenes = Array.from(document.querySelectorAll('.scene'));
+const ticks = Array.from(document.querySelectorAll('.rail i b'));
+const eraN = document.getElementById('era-n');
+const filmEl = document.getElementById('eras-film');
+const N = scenes.length; // 7 scroll slices: 5 phone-mock eras + era-6a + era-6b
+// Displayed era number per slice index — 6a and 6b are one era (6) across two slices,
+// so the rail (6 ticks) and the "N / 06" readout both key off this, not off `idx` directly.
+const ERA_OF_SLICE = [1, 2, 3, 4, 5, 6, 6];
+const TICK_OF_SLICE = [0, 1, 2, 3, 4, 5, 5];
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function render(p){
+  // p in [0,1] across the whole film. Each slice owns a 1/N span.
+  const raw = p * N;
+  const idx = Math.max(0, Math.min(N - 1, Math.floor(raw)));
+  const within = raw - idx; // 0..1 progress inside this slice
+
+  scenes.forEach((s, i) => {
+    let opacity = 0, ty = 24;
+    if (i === idx){
+      // fade in over first 18% of the slice, hold, fade out over last 18%
+      if (within < 0.18) opacity = within / 0.18;
+      else if (within > 0.82) opacity = (1 - within) / 0.18;
+      else opacity = 1;
+      ty = reduced ? 0 : (1 - Math.min(1, opacity)) * 16;
+    } else if (i === idx - 1 && within < 0.18) {
+      opacity = 1 - (within / 0.18);
+      ty = 0;
+    }
+    s.style.opacity = Math.max(0, Math.min(1, opacity));
+    s.style.transform = reduced ? 'none' : `translateY(${ty}px)`;
+  });
+
+  const activeTick = TICK_OF_SLICE[idx];
+  ticks.forEach((t, i) => {
+    let fill = 0;
+    if (i < activeTick) fill = 1;
+    else if (i === activeTick){
+      // within slice 6a (idx 5): tick fills 0→1 across 6a alone (6b holds it full).
+      fill = (idx === 5) ? within : 1;
+    }
+    t.style.transform = `scaleX(${fill})`;
+  });
+
+  eraN.textContent = String(ERA_OF_SLICE[idx]).padStart(2, '0');
+}
+
+let target = 0, current = 0, raf = null;
+
+function measure(){
+  const r = filmEl.getBoundingClientRect();
+  const total = r.height - innerHeight;
+  const p = total > 0 ? -r.top / total : 0;
+  target = Math.max(0, Math.min(1, p));
+}
+
+function loop(){
+  current += (target - current) * (reduced ? 1 : 0.16);
+  render(current);
+  raf = requestAnimationFrame(loop);
+}
+
+function onScroll(){ measure(); }
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', measure);
+
+// dev contract: ?jump=<scrollY> lands pre-scrolled, __ready gates screenshot harness
+const JUMP = new URLSearchParams(location.search).get('jump');
+if (JUMP !== null) history.scrollRestoration = 'manual';
+
+measure();
+render(target);
+current = target;
+loop();
+
+if (JUMP !== null){
+  scrollTo(0, +JUMP || 0);
+  measure();
+  render(target);
+  current = target;
+}
+window.__ready = true;
+</script>
+</body>
+</html>
