@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sujeet Mathew Jose · Product Portfolio</title>
+<script data-goatcounter="https://sujeet-jose.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fragment+Mono:ital@0&display=swap" rel="stylesheet" />
@@ -13,10 +15,6 @@
     --bg:#111214; --panel:#191B1E; --fg:#F7F6F3; --fg2:#A7A9AE; --fg3:#74777E;
     --line:rgba(247,246,243,.16); --acc:#3F6BFF; --accfg:#F7F6F3; --shot:#F7F6F3; --shotfg:#111214;
     --coral:#E8846A;
-  }
-  html[data-theme="light"]{
-    --bg:#F7F6F3; --panel:#EBE9E4; --fg:#111214; --fg2:#4A4C52; --fg3:#5E6066;
-    --line:rgba(17,18,20,.18); --acc:#2A4FD6; --accfg:#F7F6F3; --shot:#FFFFFF; --shotfg:#111214;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
@@ -28,120 +26,47 @@
   @keyframes tick{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}[data-tick]{animation:none !important}}
 
-  /* ── scroll-film section (#eras) ── */
-  #eras-film{ position:relative; height:700vh; }
-  #eras-stage{
-    position:sticky; top:0; height:100vh; overflow:hidden;
-    display:flex; flex-direction:column; justify-content:center;
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  }
-  .film-kicker{
-    position:absolute; top:0; left:0; right:0; z-index:5;
-    padding:clamp(20px,4vh,40px) clamp(16px,4vw,40px) 14px;
-    background:linear-gradient(to bottom, var(--bg) 65%, transparent);
-    display:flex; justify-content:space-between; align-items:baseline;
-    font-family:'Fragment Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--fg3);
-  }
-  .film-kicker .n{color:var(--acc)}
-  .rail{ position:absolute; bottom:0; left:0; right:0; z-index:5; padding:14px clamp(16px,4vw,40px) clamp(20px,5vh,44px); display:flex; gap:8px;}
-  .rail i{flex:1;height:3px;background:var(--line);display:block;position:relative;overflow:hidden}
-  .rail i b{position:absolute;inset:0;background:var(--acc);transform:scaleX(0);transform-origin:left;display:block}
-
-  .scene{
-    position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; align-items:center;
-    padding:76px clamp(16px,4vw,40px) 66px; opacity:0; will-change:opacity,transform;
-  }
-  .scene .copy{max-width:46ch}
-  .scene .eyebrow{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
-  .scene h2{font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(28px,4vw,52px);letter-spacing:-.04em;line-height:1.02;margin:0}
-  .scene p{margin:18px 0 0;font-size:17px;line-height:1.6;color:var(--fg2)}
-  .scene .knows{margin:28px 0 0;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
-  .scene .knows b{display:block;margin-top:8px;font-size:16px;letter-spacing:normal;text-transform:none;color:var(--fg);font-weight:500}
-
-  .mock{ justify-self:center; width:100%; max-width:340px; background:var(--panel); border:1px solid var(--line); padding:clamp(18px,3vw,28px)}
-  .mock .top{font-family:'Fragment Mono',monospace;display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.14em;color:var(--fg3);border-bottom:1px solid var(--line);padding-bottom:12px}
-  .mock .row{display:flex;gap:16px;align-items:center;padding:18px 0 16px;border-bottom:1px solid var(--line)}
-  .mock .swatch{width:46px;height:60px;background:var(--acc);opacity:.55;flex:none}
-  .mock .prod{margin:0;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.02em}
-  .mock .sub{margin:5px 0 0;font-size:13px;color:var(--fg3)}
-  .mock .line{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--fg2)}
-
-  .scene.era6 .copy6{max-width:46ch}
-  .scene.era6 .eyebrow{font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
-  .scene.era6 h2{font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(26px,3.6vw,46px);letter-spacing:-.035em;line-height:1.04;margin:0}
-  .scene.era6 p.body6{margin:16px 0 0;font-size:15.5px;line-height:1.58;color:var(--fg2)}
-  .scene.era6 .knows{margin:22px 0 0;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)}
-  .scene.era6 .knows b{display:block;margin-top:8px;font-size:15px;letter-spacing:normal;text-transform:none;color:var(--fg);font-weight:500;line-height:1.4}
-  .scene.era6{ align-items:start; }
-  .scene.era6 .copy6, .scene.era6 .joblist, .scene.era6 .exchange6{ margin-top:3vh; }
-
-  .joblist{ justify-self:center; width:100%; max-width:380px; background:var(--panel); border:1px solid var(--line); padding:clamp(16px,2.6vw,22px)}
-  .joblist .top{font-family:'Fragment Mono',monospace;display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.12em;color:var(--fg3);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:2px}
-  .jrow{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-  .jrow:last-of-type{border-bottom:none}
-  .jdot{width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--acc)}
-  .jrow.flagged .jdot{background:var(--coral)}
-  .jrow .jmeta{flex:1;min-width:0}
-  .jrow .jcat{font-family:'Fragment Mono',monospace;display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px}
-  .jrow .jlabel{display:block;font-size:14px;line-height:1.35;color:var(--fg)}
-  .jrow .jstatus{font-family:'Fragment Mono',monospace;flex:none;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3);white-space:nowrap;padding-top:1px}
-  .jrow.flagged .jstatus{color:var(--coral)}
-
-  .exchange6{ justify-self:center; width:100%; max-width:460px; }
-  .exchange6 .pill{border:1px solid var(--coral);background:rgba(232,132,106,.08);padding:clamp(16px,2.4vw,22px)}
-  .exchange6 .pill .tag{font-family:'Fragment Mono',monospace;display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
-  .exchange6 .pill .sys{margin:0;font-size:16.5px;line-height:1.5;color:var(--fg2)}
-  .exchange6 .pill .cust{margin:12px 0 0;font-size:18px;line-height:1.35;color:var(--acc);font-weight:500}
-  .caption6{font-family:'Fragment Mono',monospace;margin:16px 0 0;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);text-align:center}
-  .talk6{margin:8px 0 0;font-size:13.5px;line-height:1.5;color:var(--fg2);text-align:center;max-width:42ch;margin-left:auto;margin-right:auto}
-
-  @media (max-width:760px){
-    .scene{grid-template-columns:1fr;gap:16px;padding-top:70px}
-    .scene .copy, .scene .copy6{max-width:none}
-    .mock, .joblist, .exchange6{max-width:320px}
-    .scene.era6{ overflow-y:auto; align-content:start; -webkit-overflow-scrolling:touch; padding-bottom:56px; }
-    .scene.era6 .copy6, .scene.era6 .joblist, .scene.era6 .exchange6{ margin-top:0; }
-    .scene.era6 .joblist, .scene.era6 .exchange6{ margin-bottom:8px; }
-  }
 </style>
 </head>
 <body>
-<div style="background:var(--bg);color:var(--fg);overflow-x:hidden">
+<div id="top" style="background:var(--bg);color:var(--fg);overflow-x:hidden">
 
   <div style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px clamp(16px,4vw,40px);background:var(--bg);border-bottom:1px solid var(--line)">
-    <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;text-transform:uppercase">Sujeet Mathew Jose</span>
+    <a href="#top" style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;text-transform:uppercase;color:var(--fg)">Sujeet Mathew Jose</a>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <a href="#top" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">Home</a>
       <a href="#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">01 Work</a>
       <a href="#lab" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">02 AI lab</a>
       <a href="#eras" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">03 Point of view</a>
       <a href="#testimonials" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">04 Testimonials</a>
       <a href="mailto:sujeetmathew@gmail.com" style="display:inline-flex;align-items:center;min-height:44px;padding:0 18px;background:var(--acc);color:var(--accfg);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600">Get in touch</a>
-      <button type="button" id="theme-toggle" aria-label="Switch light or dark mode" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 14px;background:none;border:1px solid var(--line);color:var(--fg);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase">Light</button>
     </div>
   </div>
 
-  <header style="padding:clamp(40px,7vh,88px) clamp(16px,4vw,40px) 0;background-image:linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:clamp(80px,12.5vw,180px) 100%">
-    <div style="display:flex;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--line);font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)">
-      <span>Principal Product Manager</span>
-      <span style="text-align:right">Berlin · 52.52°N</span>
+  <header style="padding:clamp(18px,2.6vh,32px) clamp(16px,4vw,40px) 0">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(14px,1.4vw,18px);letter-spacing:-.01em;line-height:1.3">Principal Product Manager<span style="display:block;margin-top:4px;font-family:'Fragment Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)">Zalando Beauty</span></span>
+      <span style="text-align:right;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);white-space:nowrap">Currently located in: Berlin</span>
     </div>
-    <h1 style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(40px,8.8vw,148px);line-height:.9;letter-spacing:-.05em;margin:clamp(26px,4.5vw,56px) 0 0;max-width:16ch">Fifteen years making technology feel like it is on your <span style="color:var(--acc)">side</span>.</h1>
+    <h1 style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(26px,4.6vw,68px);line-height:.98;letter-spacing:-.045em;margin:clamp(14px,2.2vh,26px) 0 0;max-width:20ch">10+ years in technology space — building digital products that keep customer <span style="color:var(--acc)">first</span>.</h1>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:clamp(28px,4vw,48px) 0 0">
-      <a href="https://in.linkedin.com/in/sujeetmathew" style="display:inline-flex;align-items:center;min-height:50px;padding:0 24px;background:var(--acc);color:var(--accfg);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">LinkedIn</a>
-      <a href="mailto:sujeetmathew@gmail.com" style="display:inline-flex;align-items:center;min-height:50px;padding:0 22px;border:1px solid var(--line);font-size:13.5px">sujeetmathew@gmail.com</a>
-      <a href="sujeet-jose-cv.pdf" style="display:inline-flex;align-items:center;min-height:50px;padding:0 22px;border:1px solid var(--line);font-size:13px;letter-spacing:.08em;text-transform:uppercase">CV (PDF)</a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:clamp(16px,2.2vh,26px) 0 0">
+      <a href="https://in.linkedin.com/in/sujeetmathew" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;background:var(--acc);color:var(--accfg);font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">LinkedIn</a>
+      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid var(--line);background:none;color:var(--fg);font-family:'Instrument Sans',sans-serif;font-size:13px;cursor:pointer">sujeetmathew@gmail.com</button>
+      <a href="sujeet-jose-cv.pdf" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase">CV (PDF)</a>
     </div>
 
-    <figure style="margin:clamp(26px,4vw,48px) 0 0;border:1px solid var(--line);overflow:hidden">
-      <img src="hero.png" alt="Macro photograph of a silicon wafer, its circuitry catching diffracted light" style="width:100%;aspect-ratio:16/7;object-fit:cover;object-position:center 60%" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(16px,2.4vh,28px);border-top:1px solid var(--line)">
+      <p style="margin:0;padding:18px clamp(16px,2vw,28px) 20px 0;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Track record</span>Eleven years in product, fifteen in technology. Products shipped to more than 100 million customers across Europe and Asia.</p>
+      <p style="margin:0;padding:18px clamp(16px,2vw,28px) 20px;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Today</span>End-to-end customer experience for Zalando Beauty — a €1bn+ business, 10M shoppers, 14 EU markets.</p>
+      <p style="margin:0;padding:18px 0 20px clamp(16px,2vw,28px);font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Most recently</span>Took an AI recommendation and advisory system from zero to live. It ships verdicts, not guesses.</p>
+    </div>
+
+    <figure style="margin:clamp(16px,2.2vh,26px) 0 0;border:1px solid var(--line);overflow:hidden">
+      <video id="hero-loop-video" src="lab-loop.mp4" poster="lab-loop-poster.jpg"
+             autoplay loop muted playsinline preload="metadata" aria-label="Ambient loop: a personal workspace at dusk, a laptop showing a data dashboard and a code editor, a sketch notebook alongside"
+             style="width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 42%;display:block"></video>
     </figure>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(28px,4vw,56px);border-top:1px solid var(--line)">
-      <p style="margin:0;padding:22px clamp(16px,2vw,28px) 26px 0;font-size:15.5px;line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:10px">Track record</span>Eleven years in product, fifteen in technology. Products shipped to more than 100 million customers across Europe and Asia.</p>
-      <p style="margin:0;padding:22px clamp(16px,2vw,28px) 26px;font-size:15.5px;line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:10px">Today</span>End-to-end customer experience for Zalando Beauty — a €1bn+ business, 10M shoppers, 14 EU markets.</p>
-      <p style="margin:0;padding:22px 0 26px clamp(16px,2vw,28px);font-size:15.5px;line-height:1.5;color:var(--fg2)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:10px">Most recently</span>Took an AI recommendation and advisory system from zero to live. It ships verdicts, not guesses.</p>
-    </div>
   </header>
 
   <section style="padding:clamp(44px,6vw,88px) clamp(16px,4vw,40px);border-top:1px solid var(--line)">
@@ -198,22 +123,25 @@
       <div>
         <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
           <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What I built</p>
-          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.5">Two modes on one engine. Assurance gives a match or no-match verdict on the product page, with the reason. Advisor runs a guided diagnostic and ranks the full assortment in under four seconds.</p>
+          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.5">A skincare advisor working in two modes. Assurance (lives on PDP) gives a match or no-match verdict on the product page, with the reason. In case of no-match, Assurance also provides recommendations with the current PDP as anchor product.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Advisor (lives on profile) runs a guided diagnostic and provides personalized recommendations listing the top 5 products for the user from the whole skincare assortment, across 7 categories.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Next step is to build Anticipator, to anticipate customer needs ahead of time with recommendations.</p>
         </div>
         <div class="why-hard-block" style="padding:24px 0;border-bottom:1px solid var(--line)">
           <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Suitability is not one score. It combines skin-type fit, concern efficacy across seven dimensions, ingredient safety and review signals from four retailers, pre-computed offline to hold the latency budget.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The engine is deterministic by design, not a generic LLM call. Every rationale we show is provable — in a skin-health category a plausible-but-wrong answer costs more trust than silence.</p>
+          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Skincare is a hard and extremely risky category to solve the recommendation problem for. The problem is genuine and deep, but the risks of recommending products are equally high.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Suitability is not one score. It combines skin-type fit, concern efficacy and product specification fit across several dimensions, including customer review signals, based on imperfect data. The logic for generating ranks, correcting imperfect data by creating a parallel database, and the challenge of ranking good products against each other, is a tough one.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The system has to generate trust — we need explainability for each recommendation. Every rationale we show is provable through ingredient analysis and is not a marketing message. In a skin-health category, a plausible-but-wrong answer costs more trust than silence.</p>
         </div>
         <div style="padding:24px 0 0">
           <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 4px">What it moved</p>
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-family:'Fragment Mono',monospace;font-weight:700;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.04em">28%</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">of perfect-match customers add to cart</span>
+            <span style="font-family:'Fragment Mono',monospace;font-weight:700;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.04em">~15%</span>
+            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">of skincare customers expected to adopt the feature</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-family:'Fragment Mono',monospace;font-weight:700;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.04em">€5.7–9M</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">incremental GMV modelled for 2026, €16–20M in 2027</span>
+            <span style="font-family:'Fragment Mono',monospace;font-weight:700;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.04em">€xx mn (9%)</span>
+            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">GMV modelled for 2027</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
             <span style="font-family:'Fragment Mono',monospace;font-weight:700;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.04em">1.8→2.5x</span>
@@ -350,9 +278,7 @@
   </section>
 
   <figure id="lab-band" style="margin:0;position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <video id="lab-loop-video" src="lab-loop.mp4" poster="lab-loop-poster.jpg"
-           autoplay loop muted playsinline preload="metadata" aria-label="Ambient loop: a personal workspace at dusk, a laptop showing a data dashboard and a code editor, a sketch notebook alongside"
-           style="width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 42%;display:block"></video>
+    <img src="hero.png" alt="Macro photograph of a silicon wafer, its circuitry catching diffracted light" style="width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 60%;display:block" />
     <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(0deg, color-mix(in oklab, var(--bg) 55%, transparent), color-mix(in oklab, var(--bg) 25%, transparent))"></div>
   </figure>
 
@@ -437,27 +363,38 @@
     </article>
   </section>
 
-  <section id="eras-heading" style="padding:clamp(56px,7vw,110px) clamp(16px,4vw,40px) 0;border-top:1px solid var(--line)">
-    <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 clamp(20px,3vw,36px)">03 · Point of view</p>
-    <h2 style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(32px,6.4vw,104px);letter-spacing:-.045em;line-height:.94;margin:0;max-width:20ch">The same shopper, six eras of personalization.</h2>
-    <p style="margin:clamp(20px,3vw,32px) 0 0;max-width:56ch;font-size:17px;line-height:1.6;color:var(--fg2)">One product moment — a customer looking at a serum — replayed from one-size-fits-all to a chief of staff that plans ahead. Scroll to play it through.</p>
-  </section>
-
-  <section id="eras">
-    <div id="eras-film">
-      <div id="eras-stage">
-        <div class="film-kicker">
-          <span id="film-title">The same shopper, six eras of personalization</span>
-          <span><span class="n" id="era-n">01</span> / 06</span>
-        </div>
-        <div id="scenes"></div>
-        <div class="rail" id="rail"></div>
-      </div>
+  <section id="eras" style="padding:clamp(56px,7vw,110px) clamp(16px,4vw,40px) clamp(56px,7vw,110px);border-top:1px solid var(--line)">
+    <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+      <h2 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:0">Point of view</h2>
+      <p style="margin:0;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)">Writing on personalization, AI product strategy and retrieval</p>
     </div>
-  </section>
 
-  <section style="padding:0 clamp(16px,4vw,40px) clamp(56px,7vw,110px);border-top:1px solid var(--line)">
-    <p style="margin:24px 0 0;font-size:14px;letter-spacing:.02em"><a href="five-eras.html" style="border-bottom:1px solid var(--acc);padding-bottom:3px">Read the full essay, with the working demo →</a></p>
+    <a href="five-eras.html" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0;border-bottom:1px solid var(--line)">
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.04em;color:var(--fg3);opacity:.35">01</span>
+      <span>
+        <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,28px);letter-spacing:-.02em;color:var(--fg)">The same shopper, five eras of personalization</span>
+        <span style="display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--fg2);max-width:56ch">One product moment — a customer looking at a serum — replayed from one-size-fits-all to the assistant era, with a working interactive demo.</span>
+      </span>
+      <span style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
+    </a>
+
+    <a href="objections.html" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0;border-bottom:1px solid var(--line)">
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.04em;color:var(--fg3);opacity:.35">02</span>
+      <span>
+        <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,28px);letter-spacing:-.02em;color:var(--fg)">Navigating objections for your AI project idea</span>
+        <span style="display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--fg2);max-width:56ch">Three questions leadership actually cares about when you pitch an AI feature, and what to do about each one.</span>
+      </span>
+      <span style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
+    </a>
+
+    <a href="retrieval-engine.html" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0">
+      <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.04em;color:var(--fg3);opacity:.35">03</span>
+      <span>
+        <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,28px);letter-spacing:-.02em;color:var(--fg)">Challenges of retrieval in the assistant space</span>
+        <span style="display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--fg2);max-width:56ch">Why reranking cannot save what retrieval never surfaced, and what commerce has that makes this easier and harder than it looks.</span>
+      </span>
+      <span style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
+    </a>
   </section>
 
   <section id="testimonials" style="padding:clamp(56px,7vw,110px) clamp(16px,4vw,40px);border-top:1px solid var(--line)">
@@ -497,7 +434,7 @@
     </div>
   </section>
 
-  <footer style="padding:clamp(64px,9vw,140px) clamp(16px,4vw,40px) clamp(44px,6vw,80px);border-top:1px solid var(--line);background-image:linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:clamp(80px,12.5vw,180px) 100%">
+  <footer style="padding:clamp(64px,9vw,140px) clamp(16px,4vw,40px) clamp(44px,6vw,80px);border-top:1px solid var(--line)">
     <h2 style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(34px,7.4vw,116px);line-height:.92;letter-spacing:-.05em;margin:0;max-width:17ch">If you are building the assistant era, I would like to build it with <span style="color:var(--acc)">you</span>.</h2>
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:clamp(32px,5vw,64px)">
       <img src="portrait.jpg" alt="Sujeet Mathew Jose" loading="lazy" style="width:56px;height:56px;object-fit:cover;object-position:center top;flex:none" />
@@ -507,31 +444,25 @@
     </div>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:clamp(40px,6vw,88px);padding-top:20px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">
       <span>Berlin · 2026</span>
-      <span>Designed and built with Claude, including the interactive above</span>
+      <span>Designed and built with Claude</span>
     </div>
   </footer>
 </div>
 
 <script>
-/* ── theme toggle (ported from DCLogic Component.applyTheme) ── */
+/* ── copiable email ── */
 (function(){
-  let saved = null;
-  try { saved = localStorage.getItem("sj-theme"); } catch (e) {}
-  const prefersLight = typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
-  const theme = saved || (prefersLight ? "light" : "dark");
-  applyTheme(theme);
-
-  function applyTheme(t){
-    document.documentElement.dataset.theme = t;
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.textContent = t === "light" ? "Dark" : "Light";
-    try { localStorage.setItem("sj-theme", t); } catch (e) {}
-  }
-
-  const btn = document.getElementById('theme-toggle');
-  if (btn) btn.addEventListener('click', function(){
-    const current = document.documentElement.dataset.theme;
-    applyTheme(current === "light" ? "dark" : "light");
+  const btn = document.getElementById('copy-email-hero');
+  if (!btn) return;
+  const original = btn.textContent;
+  btn.addEventListener('click', function(){
+    const email = btn.dataset.email;
+    navigator.clipboard.writeText(email).then(function(){
+      btn.textContent = 'Copied ✓';
+      setTimeout(function(){ btn.textContent = original; }, 1600);
+    }).catch(function(){
+      window.location.href = 'mailto:' + email;
+    });
   });
 })();
 
@@ -539,7 +470,7 @@
    design-system.md §8: "a CSS rule cannot stop autoplay" — pause the element
    and leave the poster showing instead. */
 (function(){
-  const video = document.getElementById('lab-loop-video');
+  const video = document.getElementById('hero-loop-video');
   if (!video) return;
   const reduced = typeof matchMedia === "function" && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) {
@@ -548,184 +479,6 @@
   }
 })();
 
-/* ── content-visibility flags (ported from Component.renderVals) ──
-   Original x-dc props: showWhyHard, showEras, showTrust, all default true.
-   No editor UI exists in the plain-HTML version to toggle these, so they're
-   left as always-on (matching the defaults) — the "Why it was hard" blocks
-   render unconditionally and #eras/#testimonials are always in the DOM. */
-
-/* ── six-era scroll-film (from eras-scroll-film.html) ── */
-const ERAS = [
-  {name:"One-size-fits-all", h:"Everyone gets the serum.", p:"The product is fixed; the customer adapts to it. The catalogue is the interface.", s:"Nothing about you.", top:"PRODUCT PAGE", meta:"SKU 0001", prod:"Hydrating Serum", sub:"One formula", line:"Best seller. 4.2 ★ from 8,411 reviews."},
-  {name:"Customization", h:"You choose the variant.", p:"The system offers options; the customer does the selecting work. Choice, but no memory.", s:"What you clicked, this session.", top:"PRODUCT PAGE", meta:"SKU 0001-24", prod:"Hydrating Serum", sub:"Pick your strength", line:"Light · Medium · Rich — you decide which one is yours."},
-  {name:"Personalization", h:"The system knows your name.", p:"The product starts doing the work: a wishlist that remembers, a profile that shapes what you see.", s:"A name, a wishlist, a purchase history.", top:"FOR ANNA", meta:"♡ SAVED", prod:"Hydrating Serum", sub:"On your wishlist since March", line:"Because you bought the cleanser: reorder in 6 days?"},
-  {name:"Hyper-personalization", h:"You are not one person.", p:"The same shopper is different in December than in July, different on payday, different buying a gift. Variation, not one best guess.", s:"Mood, season, occasion, context.", top:"FOR ANNA · BERLIN", meta:"NOV · DRY AIR", prod:"Rich Recovery Serum", sub:"Swapped for the season", line:"Colder, drier week ahead. Heavier texture for now."},
-  {name:"The assistant era", h:"The assistant answers before the catalogue.", p:"The customer benchmarks this against the frontier AI she uses at work, and extends it a suspension of disbelief that is both a gift and a debt.", s:"Your skin, your routine, and what you actually asked.", top:"ASSISTANT", meta:"ANNA · 21:40", prod:"Barrier Repair Serum", sub:"Matched, with the reason", line:"“Will this sit under the foundation I bought last month?” Yes — and here is the one that layers better."}
-];
-
-const ERA6 = {
-  name: "Chief of staff",
-  h: "The assistant plans. You approve the exceptions.",
-  p: "Era 5 answers what you ask. Era 6 decides what needs doing, does most of it quietly, and only interrupts you for the one thing it isn't sure is yours to decide alone. The same shape applies anywhere a customer has standing interests, not just one category: groceries that run out on a schedule, a flight that reprices, a subscription nobody's used in months, a wardrobe with a gap in it. In beauty specifically, it looks like reordering a cleanser before it runs out, flagging a serum that dropped in price, noticing a routine has no SPF in it — and pausing only when it wants to swap a formulation for a different one, because that's the one call that isn't purely operational.",
-  s: "Everything above, plus the standing goal: your interests, held and acted on without being asked.",
-  jobs: [
-    { cat: "Household", label: "Reorder: laundry detergent due Thu", flagged: false },
-    { cat: "Travel", label: "Price drop: flight to Lisbon −18%", flagged: false },
-    { cat: "Subscriptions", label: "Renewal: streaming plan unused 60 days", flagged: false },
-    { cat: "Beauty", label: "Swap to fragrance-free serum", flagged: true }
-  ],
-  exchange: {
-    sys: "Swap to fragrance-free? You returned a scented one in May.",
-    cust: "Do it."
-  },
-  caption: "Same intelligence. Who starts the work is what changes.",
-  talk: "This is the direction I want to build in next — autonomous, trustworthy customer agents that earn the right to act, not just answer. If you're working on this too, I'd like to talk."
-};
-
-const scenesEl = document.getElementById('scenes');
-const railEl = document.getElementById('rail');
-
-ERAS.forEach((e, i) => {
-  const scene = document.createElement('div');
-  scene.className = 'scene';
-  scene.dataset.i = i;
-  scene.innerHTML = `
-    <div class="copy">
-      <p class="eyebrow">Era ${i+1} · ${e.name}</p>
-      <h2>${e.h}</h2>
-      <p>${e.p}</p>
-      <p class="knows">What the system knows<b>${e.s}</b></p>
-    </div>
-    <div class="mock">
-      <div class="top"><span>${e.top}</span><span>${e.meta}</span></div>
-      <div class="row"><span class="swatch"></span><div><p class="prod">${e.prod}</p><p class="sub">${e.sub}</p></div></div>
-      <p class="line">${e.line}</p>
-    </div>
-  `;
-  scenesEl.appendChild(scene);
-
-  const tick = document.createElement('i');
-  tick.innerHTML = '<b></b>';
-  railEl.appendChild(tick);
-});
-
-(function(){
-  const jobsHtml = ERA6.jobs.map(j => `
-    <div class="jrow${j.flagged ? ' flagged' : ''}">
-      <span class="jdot"></span>
-      <div class="jmeta"><span class="jcat">${j.cat}</span><span class="jlabel">${j.label}</span></div>
-      <span class="jstatus">${j.flagged ? 'flagged' : 'resolved'}</span>
-    </div>`).join('');
-
-  const scene6a = document.createElement('div');
-  scene6a.className = 'scene era6';
-  scene6a.dataset.i = 5;
-  scene6a.innerHTML = `
-    <div class="copy6">
-      <p class="eyebrow">Era 6 · ${ERA6.name}</p>
-      <h2>${ERA6.h}</h2>
-      <p class="body6">${ERA6.p}</p>
-      <p class="knows">What the system knows<b>${ERA6.s}</b></p>
-    </div>
-    <div class="joblist">
-      <div class="top"><span>SELF-GENERATED JOBS</span><span>3 resolved · 1 flagged</span></div>
-      ${jobsHtml}
-    </div>
-  `;
-  scenesEl.appendChild(scene6a);
-
-  const scene6b = document.createElement('div');
-  scene6b.className = 'scene era6';
-  scene6b.dataset.i = 6;
-  scene6b.innerHTML = `
-    <div class="copy6">
-      <p class="eyebrow">Era 6 · ${ERA6.name}</p>
-      <h2>Reasoning shown, not just a request made.</h2>
-      <p class="body6">The flagged job doesn't just ask — it explains itself first. That's what separates a chief of staff from a push notification wearing a nicer font.</p>
-    </div>
-    <div class="exchange6">
-      <div class="pill">
-        <span class="tag">Beauty · flagged</span>
-        <p class="sys">${ERA6.exchange.sys}</p>
-        <p class="cust">“${ERA6.exchange.cust}”</p>
-      </div>
-      <p class="caption6">${ERA6.caption}</p>
-      <p class="talk6">${ERA6.talk}</p>
-    </div>
-  `;
-  scenesEl.appendChild(scene6b);
-
-  const tick = document.createElement('i');
-  tick.innerHTML = '<b></b>';
-  railEl.appendChild(tick);
-})();
-
-const scenes = Array.from(document.querySelectorAll('.scene'));
-const ticks = Array.from(document.querySelectorAll('.rail i b'));
-const eraN = document.getElementById('era-n');
-const filmEl = document.getElementById('eras-film');
-const N = scenes.length; // 7 scroll slices: 5 phone-mock eras + era-6a + era-6b
-const ERA_OF_SLICE = [1, 2, 3, 4, 5, 6, 6];
-const TICK_OF_SLICE = [0, 1, 2, 3, 4, 5, 5];
-
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function render(p){
-  const raw = p * N;
-  const idx = Math.max(0, Math.min(N - 1, Math.floor(raw)));
-  const within = raw - idx;
-
-  scenes.forEach((s, i) => {
-    let opacity = 0, ty = 24;
-    if (i === idx){
-      if (within < 0.18) opacity = within / 0.18;
-      else if (within > 0.82) opacity = (1 - within) / 0.18;
-      else opacity = 1;
-      ty = reduced ? 0 : (1 - Math.min(1, opacity)) * 16;
-    } else if (i === idx - 1 && within < 0.18) {
-      opacity = 1 - (within / 0.18);
-      ty = 0;
-    }
-    s.style.opacity = Math.max(0, Math.min(1, opacity));
-    s.style.transform = reduced ? 'none' : `translateY(${ty}px)`;
-  });
-
-  const activeTick = TICK_OF_SLICE[idx];
-  ticks.forEach((t, i) => {
-    let fill = 0;
-    if (i < activeTick) fill = 1;
-    else if (i === activeTick){
-      fill = (idx === 5) ? within : 1;
-    }
-    t.style.transform = `scaleX(${fill})`;
-  });
-
-  eraN.textContent = String(ERA_OF_SLICE[idx]).padStart(2, '0');
-}
-
-let target = 0, current = 0;
-
-function measure(){
-  const r = filmEl.getBoundingClientRect();
-  const total = r.height - innerHeight;
-  const p = total > 0 ? -r.top / total : 0;
-  target = Math.max(0, Math.min(1, p));
-}
-
-function loop(){
-  current += (target - current) * (reduced ? 1 : 0.16);
-  render(current);
-  requestAnimationFrame(loop);
-}
-
-window.addEventListener('scroll', measure, { passive: true });
-window.addEventListener('resize', measure);
-
-measure();
-render(target);
-current = target;
-loop();
-window.__ready = true;
 </script>
 </body>
 </html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t})();</script>
+<script data-goatcounter="https://sujeet-jose.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<title>Challenges of retrieval in the assistant space · Sujeet Mathew Jose</title>
+<meta name="description" content="Why reranking cannot save what retrieval never surfaced, and what commerce has that makes instruction-aware retrieval easier and harder than it looks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F7F9FC;--card:#fff;--ink:#0B1526;--indigo:#2247D4;--deep:#16308F;--mist:#E1E8F4;--faint:#5A6A82;--wash:#EDF2FE;--note:#FFFBEA;--notebrd:#D9B441;--notetxt:#6B5900;--body:#33445C;--band:#FFFFFF;--navbg:rgba(250,251,252,.94);--inset:#FFFFFF}
+
+html[data-theme="dark"]{
+  --paper:#0A101E; --card:#111A30; --band:#0D1B2E; --ink:#E9EEF7; --body:#C4CEDE;
+  --indigo:#82A4FF; --deep:#B7C9FF; --mist:#26324B; --hair:#1B2540; --faint:#8C99AE;
+  --wash:#19233A; --navbg:rgba(12,18,32,.92); --inset:#E9EEF8;
+  --note:#2B2512; --notebrd:#8A7420; --notetxt:#D9C36A;
+}
+html[data-theme="dark"] ::selection{color:#0A101E}
+.tbtn{background:none;border:1px solid var(--mist);border-radius:99px;width:34px;height:34px;color:var(--faint);cursor:pointer;font-size:15px;line-height:1;flex:none;margin-left:14px}
+.tbtn:hover{color:var(--indigo);border-color:var(--indigo)}
+*{margin:0;padding:0;box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:'Newsreader',Georgia,serif;font-size:19px;line-height:1.72;-webkit-font-smoothing:antialiased}
+::selection{background:var(--indigo);color:#fff}
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid rgba(34,71,212,.3)}
+a:hover{color:var(--deep)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+nav{position:sticky;top:0;z-index:50;background:rgba(250,251,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--mist)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
+nav a{font-family:'IBM Plex Mono',monospace;font-size:12px;border:none;color:var(--faint)}
+nav a:hover{color:var(--indigo)}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+article{padding:68px 0 96px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo);margin-bottom:16px}
+h1{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(32px,5vw,46px);letter-spacing:-.022em;line-height:1.08;margin-bottom:14px}
+.meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);margin-bottom:42px}
+h2{font-family:'Archivo',sans-serif;font-weight:600;font-size:24px;letter-spacing:-.012em;margin:44px 0 14px}
+p{margin-bottom:18px}
+.pull{border-left:3px solid var(--indigo);padding:6px 0 6px 22px;margin:28px 0;font-size:21px;font-style:italic;color:var(--deep);max-width:52ch}
+.back{margin-top:56px}
+.credit{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--faint);font-style:normal;border-top:1px solid var(--mist);padding-top:24px;margin-top:40px}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a href="index.html">← Sujeet Mathew Jose</a><a href="index.html#eras"><span>All writing</span></a><button id="themeToggle" class="tbtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button></div></nav>
+<article>
+<div class="wrap">
+<p class="eyebrow">AI systems · Essay</p>
+<h1>Challenges of retrieval in the assistant space</h1>
+<p class="meta">Sujeet Mathew Jose · Berlin</p>
+
+<p>I've been sitting with <a href="https://hamel.dev/notes/llm/rag/p3_reasoning.html" target="_blank" rel="noopener">Hamel Husain's write-up of Orion Weller's talk on retrieval and reasoning models</a>, and the part that stuck was an argument about search interfaces. Weller puts Google's 1999 homepage next to a modern one and points out that the interaction hasn't moved: you type keywords, you get a ranked list. Then he shows a chat-style search product and makes the harder point. The interface changed. Retrieval didn't. The model sits on top, summarising results that a conventional engine picked, and the picking is where everything is decided.</p>
+
+<p>Commerce has the same shape, with a worse version of the problem, because our conventional engine is a facet cabinet.</p>
+
+<h2>Four stages, and we're stuck on two</h2>
+<p>Weller's progression is keyword search, then semantic search, then instruction-based search, then something closer to prompting the retriever about how to behave.</p>
+
+<p>Most e-commerce sits between the first two. Keyword matching with a semantic layer bolted on, business rules for merchandising, and a rerank pass at the end. Some teams have added an assistant on top of that stack. The assistant is polite about it, but it's asking the same 2015 retrieval system the same 2015 questions.</p>
+
+<p>Instruction-based retrieval is different in kind. The instruction isn't a filter applied after results come back. It changes what counts as relevant during the first pass.</p>
+
+<h2>Reranking cannot save what retrieval never surfaced</h2>
+<p>This is the part that should worry anyone who has shipped "AI search" as a reranking layer.</p>
+
+<p>Weller's example is a query about data privacy plus an instruction to find documents that use extended metaphors. A semantic retriever has no representation of "uses a metaphor," so the metaphorical document may sit thousands of ranks down. The reranker never sees it. Your reranker can only reorder the candidates you handed it, and you handed it the wrong ones.</p>
+
+<p>Translate that: a customer asks for a birthday gift for someone who hates strong smells. The correct product is an unscented body oil from a brand with weak topical relevance to the word "gift." It's at rank 4,000. Your reranker is working on the top 200. No amount of reasoning at the rerank stage will find it, because that constraint never touched the retrieval step.</p>
+
+<p>Now look at what the system still doesn't know even when it does surface a plausible shelf. This customer has never once spent above forty euros on a gift, which the price facet would catch only if she thought to set it herself. It's early December, and an unscented body oil sits very differently in a Christmas basket than it does in June. The recipient is the same sister who received a candle from this same site last year. None of that reaches retrieval. The typed query is the smallest part of the request, and we built the entire ranking system around it.</p>
+
+<p class="pull">The fix isn't a better reranker. It's an instruction-aware retriever.</p>
+
+<p>That's what Weller's Promptriever work goes after: bi-encoder embeddings trained so the instruction gets encoded into the query representation before the search happens.</p>
+
+<h2>Train the retriever on the expert, not the click</h2>
+<p>Once you accept that retrieval is where the decision happens, a second question opens up. Whose judgment is encoded in it?</p>
+
+<p>Right now, the click. Every retailer employs people who know things the catalogue doesn't say. A beauty advisor knows two products with near-identical descriptions behave differently on reactive skin. A wine buyer knows which bottle survives a warm room. That knowledge enters the system, when it enters at all, as a curated edit or a merchandising boost applied after search returns. It sits on top, correcting a ranking it had no hand in producing.</p>
+
+<p>Expert judgment can go into retrieval instead of on top of it. Weller's team built their training data by taking query-document pairs and generating sharper relevance criteria, along with negatives that were topically right and criteria-wrong. Put an expert where the generator was. A dermatologist says this cleanser suits reactive skin and that one doesn't, though both say "gentle" on the bottle. That's a labelled pair with a hard negative already attached. Enough of them and you have a fine-tuning set that teaches a retriever what suitability means in your category, rather than what similarity means in general English.</p>
+
+<p>Rank1 points at a second route. It learned to reason by training on reasoning chains produced by a stronger model. Swap that for your own advisors. Ask twenty of them to write out why they'd put this product in front of this customer and not that one, and you have traces carrying knowledge that no general-purpose model was trained on and no competitor can scrape.</p>
+
+<p>The objection is cost, and it dissolves faster than people expect. Nobody is labelling a million SKUs by hand. You need enough examples for the model to learn the principle, and then it generalises across the catalogue. Weller's models transfer well even with no in-domain training at all, so a few thousand expert-curated examples in one category is a modest bet.</p>
+
+<p>One trade-off I've had to sit with. A deterministic rule engine built on an expert framework is provable. You can show precisely why a product was recommended, which stops being optional in anything touching health or skin. A learned retriever with expert judgment inside its weights covers far more of the catalogue but hands you no audit trail. That isn't a reason to avoid it. It's a reason to run both, with the deterministic layer owning the claims you make out loud, and the learned layer deciding what gets considered in the first place.</p>
+
+<h2>Three things commerce has that make this easier than it looks</h2>
+<p><strong>Returns are labelled instruction negatives.</strong> Promptriever's training data trick is generating instruction negatives — documents relevant to the query but wrong for the instruction. That's an expensive synthetic step in general search. In commerce, we generate them for free every day. A customer searched for foundation, bought one, returned it because the shade was wrong. That's a product that matched the query and violated the constraint, labelled by someone who cared enough to ship it back. Complaint text in reviews is the same thing at scale. Most retailers are sitting on a training set for instruction-aware retrieval and treating it as a logistics cost line.</p>
+
+<p><strong>We already owe the customer a rationale.</strong> In general RAG, a reasoning trace is overhead you tolerate for better ranking. In commerce, especially in categories where suitability is the purchase decision, the explanation is a product feature we build anyway. Weller's Rank1 generates an auditable chain of reasoning to judge relevance. We need something to show the customer regardless. The compute serves two purposes at once, which changes the cost calculation considerably.</p>
+
+<p><strong>Products carry more structure than documents.</strong> A product has attributes, images, reviews, price history, stock position, and a relationship to what this specific person bought last spring. That's a richer object to reason over than a paragraph of text.</p>
+
+<h2>And two that make it harder</h2>
+<p>The rich-structure advantage evaporates if your catalogue data is thin, which for most retailers it is. An instruction like "fragrance-free" is unanswerable if the attribute isn't populated for two-thirds of the assortment. I've run the content programme that fixes this for a top slice of SKUs, and I can tell you the model was never the constraint. Instruction-based retrieval is bottlenecked on product data long before it's bottlenecked on embeddings.</p>
+
+<p>The second problem is measurement, and it's nastier than it first appears. Weller's team hit low scores on an older benchmark and found the cause: their model was surfacing documents no human annotator had ever judged, because no previous system had ever retrieved them. They re-judged by hand and the model jumped to the top.</p>
+
+<p>Now consider where e-commerce relevance labels come from. Clicks and purchases. Generated by the current ranker. Which means a genuinely better retriever will surface products with no engagement history, and your offline evaluation will score them as failures, because absence of evidence and evidence of absence look identical in a click log. Your metrics will actively punish the improvement. Anyone attempting this needs a human judgment set built before they start, or they'll kill the better system in an A/B test and never know why.</p>
+
+<h2>What I'd build</h2>
+<p>Split the stack by intent. A fast instruction-aware retriever handles the whole catalogue on every query, because that's where constraints have to enter. A slower reasoning reranker runs only on the top candidates, and only in high-intent moments where a customer is deciding rather than browsing. Weller is explicit that the reasoning models are powerful and slow; in commerce you cannot spend that budget on someone scrolling a category page, but you can absolutely spend it when they've asked a real question and are waiting for a real answer.</p>
+
+<p>Then hand merchandisers the prompt. One finding from Promptriever that hasn't been metabolised by anyone I've spoken to in retail: you can change retrieval behaviour with natural language instead of tuning numeric thresholds. Not "set recall boost to 1.4" but "be generous with recall for gifting queries, be conservative for anything touching skin sensitivity." That's a different operating model for merchandising teams. It also needs versioning and audit before it goes anywhere near production, because a sentence someone edited on a Friday afternoon is now a ranking parameter.</p>
+
+<p>The uncomfortable summary is that most of us have been improving the wrong layer. The assistant on top got better every quarter. The thing that decides which fifty products the assistant is allowed to talk about has barely changed since we launched it.</p>
+
+<p class="credit">Based on <a href="https://hamel.dev/notes/llm/rag/p3_reasoning.html" target="_blank" rel="noopener">P3: Optimizing Retrieval with Reasoning Models</a> by Hamel Husain, featuring a talk by Orion Weller of Johns Hopkins University. Weller's Promptriever and Rank1 models and their training data are open source.</p>
+
+<p class="back"><a href="index.html#eras">← All writing</a></p>
+</div>
+</article>
+
+<script>
+const tt=document.getElementById('themeToggle');
+if(tt){tt.addEventListener('click',()=>{const r=document.documentElement;const n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}})}
+</script>
+</body>
+</html>
