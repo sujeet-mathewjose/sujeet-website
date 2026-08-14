@@ -25,41 +25,49 @@
   html{scroll-behavior:smooth}
   @keyframes tick{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}[data-tick]{animation:none !important}}
+  .nav-link:hover{background-color:var(--panel);border-color:var(--fg2);color:var(--fg)}
+  .nav-link:active{background-color:var(--line)}
+  a.nav-link[href^="mailto"]:hover{opacity:.85;color:var(--accfg)}
 
 </style>
 </head>
 <body>
 <div id="top" style="background:var(--bg);color:var(--fg);overflow-x:hidden">
 
-  <div style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px clamp(16px,4vw,40px);background:var(--bg);border-bottom:1px solid var(--line)">
-    <a href="#top" style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;text-transform:uppercase;color:var(--fg)">Sujeet Mathew Jose</a>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <a href="#top" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">Home</a>
-      <a href="#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">01 Work</a>
-      <a href="#lab" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">02 AI lab</a>
-      <a href="#eras" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">03 Point of view</a>
-      <a href="#testimonials" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500">04 Testimonials</a>
-      <a href="mailto:sujeetmathew@gmail.com" style="display:inline-flex;align-items:center;min-height:44px;padding:0 18px;background:var(--acc);color:var(--accfg);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600">Get in touch</a>
+  <div style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px clamp(16px,4vw,40px);background:var(--bg);border-bottom:1px solid var(--line)">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
+      <a href="#top" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">Home</a>
+      <a href="#work" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">01 Work</a>
+      <a href="#lab" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">02 AI lab</a>
+      <a href="#eras" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">03 Point of view</a>
+      <a href="#testimonials" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">04 Testimonials</a>
+      <a href="mailto:sujeetmathew@gmail.com" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 20px;background:var(--acc);color:var(--accfg);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:opacity .15s ease">Get in touch</a>
     </div>
   </div>
 
   <header style="padding:clamp(18px,2.6vh,32px) clamp(16px,4vw,40px) 0">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:14px;border-bottom:1px solid var(--line)">
-      <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(14px,1.4vw,18px);letter-spacing:-.01em;line-height:1.3">Principal Product Manager<span style="display:block;margin-top:4px;font-family:'Fragment Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)">Zalando Beauty</span></span>
+      <div style="display:flex;align-items:center;gap:18px">
+        <img src="headshot.jpg" alt="Sujeet Mathew Jose" style="width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center top;flex:none;border:1px solid var(--line)" />
+        <span>
+          <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(26px,3vw,38px);letter-spacing:-.02em;line-height:1.1;margin-bottom:8px">Sujeet Mathew Jose</span>
+          <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(17px,1.8vw,23px);letter-spacing:-.01em;line-height:1.3">Principal Product Manager<span style="display:block;margin-top:5px;font-family:'Fragment Mono',monospace;font-weight:400;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)">Zalando Beauty</span></span>
+        </span>
+      </div>
       <span style="text-align:right;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);white-space:nowrap">Currently located in: Berlin</span>
     </div>
-    <h1 style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(26px,4.6vw,68px);line-height:.98;letter-spacing:-.045em;margin:clamp(14px,2.2vh,26px) 0 0;max-width:20ch">10+ years in technology space — building digital products that keep customer <span style="color:var(--acc)">first</span>.</h1>
+    <p style="font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:clamp(14px,1.4vw,17px);letter-spacing:-.01em;color:var(--fg2);margin:clamp(14px,2.2vh,26px) 0 0">Building digital products that keep customer <span style="color:var(--acc)">first</span>.</p>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:clamp(16px,2.2vh,26px) 0 0">
-      <a href="https://in.linkedin.com/in/sujeetmathew" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;background:var(--acc);color:var(--accfg);font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">LinkedIn</a>
-      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid var(--line);background:none;color:var(--fg);font-family:'Instrument Sans',sans-serif;font-size:13px;cursor:pointer">sujeetmathew@gmail.com</button>
-      <a href="sujeet-jose-cv.pdf" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase">CV (PDF)</a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin:clamp(16px,2.2vh,26px) 0 0">
+      <a href="https://in.linkedin.com/in/sujeetmathew" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">LinkedIn</a>
+      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:13.5px;color:var(--fg);border-bottom:1px solid var(--line)">sujeetmathew@gmail.com</button>
+      <a href="sujeet-jose-cv.pdf" style="font-size:13.5px;letter-spacing:.02em;border-bottom:1px solid var(--line);padding-bottom:2px;color:var(--fg)">CV (PDF)</a>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(16px,2.4vh,28px);border-top:1px solid var(--line)">
       <p style="margin:0;padding:18px clamp(16px,2vw,28px) 20px 0;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Track record</span>Eleven years in product, fifteen in technology. Products shipped to more than 100 million customers across Europe and Asia.</p>
       <p style="margin:0;padding:18px clamp(16px,2vw,28px) 20px;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Today</span>End-to-end customer experience for Zalando Beauty — a €1bn+ business, 10M shoppers, 14 EU markets.</p>
-      <p style="margin:0;padding:18px 0 20px clamp(16px,2vw,28px);font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Most recently</span>Took an AI recommendation and advisory system from zero to live. It ships verdicts, not guesses.</p>
+      <p style="margin:0;padding:18px 0 20px clamp(16px,2vw,28px);font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">2x · Commercially savvy</span>Oversaw high growth products that led to xx mn revenue at each company I have worked for, serving over 100 million customers along the way.</p>
     </div>
 
     <figure style="margin:clamp(16px,2.2vh,26px) 0 0;border:1px solid var(--line);overflow:hidden">
@@ -68,31 +76,6 @@
              style="width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 42%;display:block"></video>
     </figure>
   </header>
-
-  <section style="padding:clamp(44px,6vw,88px) clamp(16px,4vw,40px);border-top:1px solid var(--line)">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(20px,3vw,40px)">
-      <div>
-        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.04em;margin:0;color:var(--acc)">0→1</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:12px 0 8px">Builder</h3>
-        <p style="margin:0;font-size:15px;line-height:1.55;color:var(--fg2)">Products taken from nothing to live — most recently an AI recommendation and advisory system, built from scratch.</p>
-      </div>
-      <div>
-        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.04em;margin:0;color:var(--acc)">IC ⇄ Lead</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:12px 0 8px">Flexible by intent</h3>
-        <p style="margin:0;font-size:15px;line-height:1.55;color:var(--fg2)">Four years hiring and coaching PMs. I move between building and leading, following what the product needs.</p>
-      </div>
-      <div>
-        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.04em;margin:0;color:var(--acc)">360°</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:12px 0 8px">Systems thinker</h3>
-        <p style="margin:0;font-size:15px;line-height:1.55;color:var(--fg2)">Technology, design and commercial held in one view — and an easy way of working across all three.</p>
-      </div>
-      <div>
-        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.04em;margin:0;color:var(--acc)">2x</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;margin:12px 0 8px">Commercial</h3>
-        <p style="margin:0;font-size:15px;line-height:1.55;color:var(--fg2)">Doubled revenue at each company I have worked for, serving over 100 million customers along the way.</p>
-      </div>
-    </div>
-  </section>
 
   <section id="work" style="padding:clamp(56px,7vw,110px) clamp(16px,4vw,40px) 0">
     <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)">
