@@ -29,45 +29,57 @@
   .nav-link:active{background-color:var(--line)}
   a.nav-link[href^="mailto"]:hover{opacity:.85;color:var(--accfg)}
 
+  @media (max-width:640px){
+    .hdr-top-row{flex-wrap:wrap;gap:12px !important}
+    .hdr-location{white-space:normal !important;text-align:left !important}
+    .hdr-id{gap:14px !important}
+    .hdr-photo{width:64px !important;height:64px !important}
+    .track-grid{grid-template-columns:1fr !important}
+    .track-grid>p{border-right:none !important;border-bottom:1px solid var(--line);padding-left:0 !important}
+    .track-grid>p:last-child{border-bottom:none}
+    .case-media{position:static !important;top:auto !important}
+    .pov-card{grid-template-columns:auto 1fr !important;row-gap:6px !important}
+    .pov-card .pov-read{grid-column:1/-1;justify-self:start !important}
+  }
 </style>
 </head>
 <body>
 <div id="top" style="background:var(--bg);color:var(--fg);overflow-x:hidden">
 
-  <div style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px clamp(16px,4vw,40px);background:var(--bg);border-bottom:1px solid var(--line)">
+  <div style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:9px clamp(16px,4vw,40px);background:var(--bg);border-bottom:1px solid var(--line)">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center">
-      <a href="#top" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">Home</a>
-      <a href="#work" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">01 Work</a>
-      <a href="#lab" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">02 AI lab</a>
-      <a href="#eras" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">03 Point of view</a>
-      <a href="#testimonials" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">04 Testimonials</a>
-      <a href="mailto:sujeetmathew@gmail.com" class="nav-link" style="display:inline-flex;align-items:center;min-height:46px;padding:0 20px;background:var(--acc);color:var(--accfg);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:opacity .15s ease">Get in touch</a>
+      <a href="#top" class="nav-link" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">Home</a>
+      <a href="#work" class="nav-link" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">01 Work</a>
+      <a href="#lab" class="nav-link" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">02 AI lab</a>
+      <a href="#eras" class="nav-link" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">03 Point of view</a>
+      <a href="#testimonials" class="nav-link" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--line);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background-color .15s ease,border-color .15s ease">04 Testimonials</a>
+      <a href="mailto:sujeetmathew@gmail.com" class="nav-link" style="display:inline-flex;align-items:center;min-height:40px;padding:0 20px;background:var(--acc);color:var(--accfg);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;transition:opacity .15s ease">Get in touch</a>
     </div>
   </div>
 
-  <header style="padding:clamp(18px,2.6vh,32px) clamp(16px,4vw,40px) 0">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:14px;border-bottom:1px solid var(--line)">
-      <div style="display:flex;align-items:center;gap:22px">
-        <img src="headshot.jpg" alt="Sujeet Mathew Jose" style="width:92px;height:92px;border-radius:50%;object-fit:cover;object-position:center 20%;flex:none;border:1px solid var(--line)" />
+  <header style="padding:clamp(12px,1.8vh,22px) clamp(16px,4vw,40px) 0">
+    <div class="hdr-top-row" style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-bottom:10px;border-bottom:1px solid var(--line)">
+      <div class="hdr-id" style="display:flex;align-items:center;gap:18px">
+        <img class="hdr-photo" src="headshot.jpg" alt="Sujeet Mathew Jose" style="width:clamp(72px,9vw,112px);height:clamp(72px,9vw,112px);border-radius:8px;object-fit:cover;object-position:center 20%;flex:none;border:1px solid var(--line)" />
         <span>
-          <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;line-height:1.15;margin-bottom:6px">Sujeet Mathew Jose</span>
-          <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,30px);letter-spacing:-.01em;line-height:1.25">Principal Product Manager<span style="display:block;margin-top:5px;font-family:'Fragment Mono',monospace;font-weight:400;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)">Zalando Beauty</span></span>
+          <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;line-height:1.1;margin-bottom:4px">Sujeet Mathew Jose</span>
+          <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(17px,2vw,25px);letter-spacing:-.01em;line-height:1.15">Principal Product Manager<span style="display:block;margin-top:3px;font-family:'Fragment Mono',monospace;font-weight:400;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)">Zalando Beauty</span></span>
         </span>
       </div>
-      <span style="text-align:right;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);white-space:nowrap">Currently located in: Berlin</span>
+      <span class="hdr-location" style="text-align:right;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);white-space:nowrap">Currently located in: Berlin</span>
     </div>
-    <p style="font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:clamp(14px,1.4vw,17px);letter-spacing:-.01em;color:var(--fg2);margin:clamp(14px,2.2vh,26px) 0 0">Building digital products that keep customer <span style="color:var(--acc)">first</span>.</p>
+    <p style="font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:clamp(13px,1.3vw,16px);letter-spacing:-.01em;color:var(--fg2);margin:clamp(10px,1.6vh,18px) 0 0">Building digital products that keep customer <span style="color:var(--acc)">first</span>.</p>
 
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin:clamp(16px,2.2vh,26px) 0 0">
-      <a href="https://in.linkedin.com/in/sujeetmathew" style="font-size:13.5px;font-weight:600;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">LinkedIn</a>
-      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:13.5px;color:var(--fg);border-bottom:1px solid var(--line)">sujeetmathew@gmail.com</button>
-      <a href="sujeet-jose-cv.pdf" style="font-size:13.5px;letter-spacing:.02em;border-bottom:1px solid var(--line);padding-bottom:2px;color:var(--fg)">CV (PDF)</a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin:clamp(10px,1.6vh,18px) 0 0">
+      <a href="https://in.linkedin.com/in/sujeetmathew" style="font-size:13px;font-weight:600;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">LinkedIn</a>
+      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--fg);border-bottom:1px solid var(--line)">sujeetmathew@gmail.com</button>
+      <a href="sujeet-jose-cv.pdf" style="font-size:13px;letter-spacing:.02em;border-bottom:1px solid var(--line);padding-bottom:2px;color:var(--fg)">CV (PDF)</a>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(16px,2.4vh,28px);border-top:1px solid var(--line)">
-      <p style="margin:0;padding:18px clamp(16px,2vw,28px) 20px 0;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Track record</span>Eleven years in product, fifteen in technology. Products shipped to more than 100 million customers across Europe and Asia.</p>
-      <p style="margin:0;padding:18px clamp(16px,2vw,28px) 20px;font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">Today</span>End-to-end customer experience for Zalando Beauty — a €1bn+ business, 10M shoppers, 14 EU markets.</p>
-      <p style="margin:0;padding:18px 0 20px clamp(16px,2vw,28px);font-size:clamp(16px,1.5vw,19px);line-height:1.5;color:var(--fg2)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:9px">2x · Commercially savvy</span>Oversaw high growth products that led to xx mn revenue at each company I have worked for, serving over 100 million customers along the way.</p>
+    <div class="track-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(10px,1.8vh,20px);border-top:1px solid var(--line)">
+      <p style="margin:0;padding:14px clamp(16px,2vw,28px) 16px 0;font-size:clamp(13.5px,1.2vw,15.5px);line-height:1.45;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:7px">Track record</span>Eleven years in product, fifteen in technology. Products shipped to more than 100 million customers across Europe and Asia.</p>
+      <p style="margin:0;padding:14px clamp(16px,2vw,28px) 16px;font-size:clamp(13.5px,1.2vw,15.5px);line-height:1.45;color:var(--fg2);border-right:1px solid var(--line)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:7px">Today</span>End-to-end customer experience for Zalando Beauty — a €1bn+ business, 10M shoppers, 14 EU markets.</p>
+      <p style="margin:0;padding:14px 0 16px clamp(16px,2vw,28px);font-size:clamp(13.5px,1.2vw,15.5px);line-height:1.45;color:var(--fg2)"><span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin-bottom:7px">2x · Commercially savvy</span>Oversaw high growth products that led to xx mn revenue at each company I have worked for, serving over 100 million customers along the way.</p>
     </div>
 
     <figure style="margin:clamp(16px,2.2vh,26px) 0 0;border:1px solid var(--line);overflow:hidden">
@@ -84,7 +96,7 @@
     </div>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0">
-      <div style="position:sticky;top:110px">
+      <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">01</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Beauty Advisor &amp; Assurance</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Zalando · 0→1 · live iOS DE</p>
@@ -135,7 +147,7 @@
     </article>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
-      <div style="position:sticky;top:110px">
+      <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">02</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Beauty product page, rebuilt</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Zalando · shipped · 14 markets</p>
@@ -175,7 +187,7 @@
     </article>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
-      <div style="position:sticky;top:110px">
+      <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">03</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">ML-driven flash sales</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Blibli · shipped · machine learning</p>
@@ -272,7 +284,7 @@
     </div>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0">
-      <div style="position:sticky;top:110px">
+      <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">A</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">LLM Wiki, a second brain</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · daily use</p>
@@ -301,7 +313,7 @@
     </article>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
-      <div style="position:sticky;top:110px">
+      <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">B</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">A personal AI operating system</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · runs every day</p>
@@ -331,7 +343,7 @@
     </article>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
-      <div style="position:sticky;top:110px">
+      <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">C</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Aura &amp; Vivante</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">In build · voice-first</p>
@@ -352,31 +364,31 @@
       <p style="margin:0;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)">Writing on personalization, AI product strategy and retrieval</p>
     </div>
 
-    <a href="five-eras.html" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0;border-bottom:1px solid var(--line)">
+    <a href="five-eras.html" class="pov-card" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0;border-bottom:1px solid var(--line)">
       <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.04em;color:var(--fg3);opacity:.35">01</span>
       <span>
         <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,28px);letter-spacing:-.02em;color:var(--fg)">The same shopper, five eras of personalization</span>
         <span style="display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--fg2);max-width:56ch">One product moment — a customer looking at a serum — replayed from one-size-fits-all to the assistant era, with a working interactive demo.</span>
       </span>
-      <span style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
+      <span class="pov-read" style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
     </a>
 
-    <a href="objections.html" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0;border-bottom:1px solid var(--line)">
+    <a href="objections.html" class="pov-card" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0;border-bottom:1px solid var(--line)">
       <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.04em;color:var(--fg3);opacity:.35">02</span>
       <span>
         <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,28px);letter-spacing:-.02em;color:var(--fg)">Navigating objections for your AI project idea</span>
         <span style="display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--fg2);max-width:56ch">Three questions leadership actually cares about when you pitch an AI feature, and what to do about each one.</span>
       </span>
-      <span style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
+      <span class="pov-read" style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
     </a>
 
-    <a href="retrieval-engine.html" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0">
+    <a href="retrieval-engine.html" class="pov-card" style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:clamp(28px,4vw,40px) 0">
       <span style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.04em;color:var(--fg3);opacity:.35">03</span>
       <span>
         <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,28px);letter-spacing:-.02em;color:var(--fg)">Challenges of retrieval in the assistant space</span>
         <span style="display:block;margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--fg2);max-width:56ch">Why reranking cannot save what retrieval never surfaced, and what commerce has that makes this easier and harder than it looks.</span>
       </span>
-      <span style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
+      <span class="pov-read" style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);white-space:nowrap">Read →</span>
     </a>
   </section>
 
