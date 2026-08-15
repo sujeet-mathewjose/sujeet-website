@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(!t){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t})();</script>
+<script data-goatcounter="https://sujeet-jose.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<title>Evals on my AI Skincare Advisor · Sujeet Mathew Jose</title>
+<meta name="description" content="How the scoring pipeline for an AI skincare advisor works, how I test it, and what I got wrong the first time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F7F9FC;--card:#fff;--ink:#0B1526;--indigo:#2247D4;--deep:#16308F;--mist:#E1E8F4;--faint:#5A6A82;--wash:#EDF2FE;--note:#FFFBEA;--notebrd:#D9B441;--notetxt:#6B5900;--body:#33445C;--band:#FFFFFF;--navbg:rgba(250,251,252,.94);--inset:#FFFFFF}
+
+html[data-theme="dark"]{
+  --paper:#0A101E; --card:#111A30; --band:#0D1B2E; --ink:#E9EEF7; --body:#C4CEDE;
+  --indigo:#82A4FF; --deep:#B7C9FF; --mist:#26324B; --hair:#1B2540; --faint:#8C99AE;
+  --wash:#19233A; --navbg:rgba(12,18,32,.92); --inset:#E9EEF8;
+  --note:#2B2512; --notebrd:#8A7420; --notetxt:#D9C36A;
+}
+html[data-theme="dark"] ::selection{color:#0A101E}
+.tbtn{background:none;border:1px solid var(--mist);border-radius:99px;width:34px;height:34px;color:var(--faint);cursor:pointer;font-size:15px;line-height:1;flex:none;margin-left:14px}
+.tbtn:hover{color:var(--indigo);border-color:var(--indigo)}
+*{margin:0;padding:0;box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:'Newsreader',Georgia,serif;font-size:19px;line-height:1.72;-webkit-font-smoothing:antialiased}
+::selection{background:var(--indigo);color:#fff}
+a{color:var(--indigo);text-decoration:none;border-bottom:1px solid rgba(34,71,212,.3)}
+a:hover{color:var(--deep)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+nav{position:sticky;top:0;z-index:50;background:rgba(250,251,248,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--mist)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
+nav a{font-family:'IBM Plex Mono',monospace;font-size:12px;border:none;color:var(--faint)}
+nav a:hover{color:var(--indigo)}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+article{padding:68px 0 96px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo);margin-bottom:16px}
+h1{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(32px,5vw,46px);letter-spacing:-.022em;line-height:1.08;margin-bottom:14px}
+.meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);margin-bottom:42px}
+h2{font-family:'Archivo',sans-serif;font-weight:600;font-size:24px;letter-spacing:-.012em;margin:44px 0 14px}
+p{margin-bottom:18px}
+.pull{border-left:3px solid var(--indigo);padding:6px 0 6px 22px;margin:28px 0;font-size:21px;font-style:italic;color:var(--deep);max-width:52ch}
+ul{margin:0 0 18px 22px}
+li{margin-bottom:8px}
+.formula{font-family:'IBM Plex Mono',monospace;font-size:17px;text-align:center;margin:24px 0;color:var(--deep)}
+.back{margin-top:56px}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a href="index.html">← Sujeet Mathew Jose</a><a href="index.html#eras"><span>All writing</span></a><button id="themeToggle" class="tbtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button></div></nav>
+<article>
+<div class="wrap">
+<p class="eyebrow">AI systems · Essay</p>
+<h1>Evals on my AI Skincare Advisor</h1>
+<p class="meta">Sujeet Mathew Jose · Berlin · How the scoring pipeline works, how I test it, and what I got wrong the first time</p>
+
+<h2>What the feature does</h2>
+<p>A customer answers a short set of questions about their skin: skin type (dry, oily, combination, normal), up to three concerns from a list of seven (dryness, redness, blemishes, fine lines and so on), and a sensitivity flag. They get back a ranked shortlist of products for each routine step, each with a three-point rationale for why it was selected for them.</p>
+
+<p>Behind that is a scoring pipeline that runs offline, not at request time. Every product in the catalogue, several thousand SKUs across eight categories, is pre-scored against every skin type and every concern using generative AI. At request time the system is filtering and ranking over precomputed scores, not generating anything new. That is the key point for evaluation: the thing to test is the scoring pass, and it can be tested exhaustively because it is a batch job, not a live conversation.</p>
+
+<p>Each product carries a score matrix: four skin-type scores, seven concern scores, and a short generated rationale for each non-zero score. That is eleven scored dimensions per product, each with an accompanying text explanation.</p>
+
+<h2>The scoring scale</h2>
+<p>Scores run 0 to 4, and the definitions were chosen to constrain model behaviour rather than to be maximally expressive.</p>
+<ul>
+<li><strong>0, not relevant to this dimension.</strong> Keeps the matrix sparse; most products score 0 on most concerns.</li>
+<li><strong>1, actively counterproductive.</strong> Requires naming the specific ingredient responsible, so no unfalsifiable warnings.</li>
+<li><strong>2, good for the category generally.</strong> The default when evidence is insufficient, so the failure mode is neutral rather than wrong.</li>
+<li><strong>3, good for this specific concern.</strong> The working positive score.</li>
+<li><strong>4, best in class.</strong> Deliberately rare; requires evidence beyond ingredient presence.</li>
+</ul>
+
+<p>The two constraints doing real work are the ones on 1 and 2. Requiring a named ingredient for a negative score eliminated a large class of hedged output, warnings like "may not be suitable for sensitive skin" with nothing behind them. Making 2 the insufficient-evidence default means a product with sparse ingredient data lands on fine for the category rather than being guessed high or low.</p>
+
+<h2>Dual-run reconciliation</h2>
+<p>The whole catalogue is scored twice, in independent runs, and the two score matrices are diffed. Products where both runs agree are published. Products where they disagree are flagged for review, and the disagreement rate per dimension turns out to be a reasonable proxy for how well-specified that dimension is.</p>
+
+<p>Alongside this there is an anchor set: roughly 100 products where the correct scores have been established and fixed. Every run is checked against them before anything else. A prompt change that improves aggregate agreement but moves an anchor score is treated as a regression. That check has caught several changes that looked like improvements on paper.</p>
+
+<h2>Why this is hard to test conventionally</h2>
+<p>Two properties of the domain break normal QA.</p>
+
+<p>First, the errors are asymmetric. Scoring a decent moisturiser a 2 instead of a 3 is a mild ranking problem. Scoring a 10% glycolic acid product a 3 for redness, when high-strength AHAs aggravate rosacea, is a product that hurts someone. An accuracy metric that averages these together is not measuring the thing that matters. Safety-relevant errors need their own track with their own threshold, and in practice that means a hard rule layer that never touches the model at all.</p>
+
+<p class="pull">Show a profile, dry skin, uneven tone, high sensitivity, to five product specialists and you will get five defensible product sets.</p>
+
+<p>Second, and less tractably: for a large share of the scoring there is no single correct answer. This is the part that resists automation, and it forces a distinction between two different failure types that need different fixes.</p>
+
+<p><strong>Correctness failures</strong> are when the product does not exist, the stated percentage is wrong, or the ingredient is not actually in the formula. These are retrieval and grounding problems. A better model or better source data fixes them. We also used web crawling agents to check correctness of the data.</p>
+
+<p><strong>Quality failures</strong> are when the score is defensible but not what an expert would give, or the ranking is reasonable but not right. A better model does not fix these, because the model has no way of knowing what "right" means here. Only calibration against human judgment does.</p>
+
+<h2>The evaluation stack</h2>
+<p>Deterministic checks are linting runs that catch known errors on every scored product on every run. They cost nothing and catch a meaningful share of real failures.</p>
+
+<p>Does the product still exist and is it purchasable? A well-argued recommendation for a delisted SKU is a total failure regardless of rationale quality.</p>
+
+<p>Contraindication rules: a hard ruleset with severities. Retinoids flagged for pregnancy. High-strength AHAs against a rosacea or redness profile. Benzoyl peroxide and retinoids in the same routine. Photosensitising actives without an accompanying SPF recommendation. These are pattern matches, not judgment calls, and should never be delegated to a probabilistic evaluator.</p>
+
+<p>Rich, heavy-texture products scoring high for oily skin, or abrasive ingredients scoring high against sensitivity, get flagged the same way. And does any score of 3 or 4 have a corresponding rationale, and does any score of 1 name an ingredient? Both are schema-level requirements from the rubric.</p>
+
+<h2>Building the golden set with one expert rater</h2>
+<p>The human calibration layer uses one rater: a cosmetic chemist who formulates skincare commercially. He grades a sample of 200 products drawn from across the eight categories, with the sample deliberately stratified so every skin-type and concern dimension has enough coverage to be measurable rather than being dominated by whichever category happens to be largest in the catalogue.</p>
+
+<p>The labelling protocol is designed to be usable both as ground truth and as diagnostic material. For each of the eleven scored dimensions per product, the rater does three things.</p>
+
+<p>He marks the model's score acceptable or not acceptable, against the rubric definitions rather than his personal preference. "Acceptable" means the model's score is defensible given the ingredients and the rules, not necessarily the score he would have given.</p>
+
+<p>Where the score is not acceptable, he records the correct score on the 0-4 scale. This is what turns the golden set from a pass or fail sheet into something usable for regression testing: the corrections are the ground truth the system is expected to eventually reach.</p>
+
+<p>He writes a one-line rationale for every rejection, naming the specific reason, usually an ingredient that was misread, an evidence gap, or a rubric threshold that was misapplied. These rationales are what let me diagnose whether the failure sits in preprocessing, in the initial prompt, or in the scoring prompt itself.</p>
+
+<p>Two things follow directly from choosing acceptable or not-acceptable rather than a Likert scale. Binary calls are stable across sessions and produce clean confusion matrices that both kappa and MCC operate on. And requiring the correct score only on rejections keeps the effort proportional. 200 products is a substantial commitment for one expert, and asking for a full re-score of every acceptable case would have cut the sample size well below what the calibration needs.</p>
+
+<h2>LLM-as-judge, calibrated against the golden set</h2>
+<p>The 200-product set is partitioned before any judge development happens.</p>
+
+<p>A small few-shot set, around 20 products, lives inside the judge prompt as worked examples of acceptable and non-acceptable scores. These products never appear in any evaluation number.</p>
+
+<p>A development partition of roughly 90 products is used to iterate the judge prompt. I run the judge over these, look at where its verdicts diverge from the rater's, and adjust the prompt, sharpening the rubric language, adding worked cases for boundary conditions, tightening definitions where the disagreement is really about the criterion rather than the product.</p>
+
+<p>A held-out test partition of roughly 90 products is touched only to measure the final judge. This is the number that gets reported and the only number that means anything. Reusing the development partition for measurement is the fastest way to produce agreement statistics that describe how well the judge memorised the products rather than how well it applies the rubric.</p>
+
+<p>On the held-out partition I compute two agreement statistics between the judge's acceptable or not-acceptable verdicts and the rater's.</p>
+
+<p>Cohen's kappa is the default measure. It corrects for chance agreement, which matters because the rater's acceptable rate is high (as the system has improved, most scores are already defensible), and raw agreement inflates badly on skewed distributions.</p>
+
+<p>The judge is deployed as a gate once its held-out kappa passes the working threshold. Below 0.6 the judge is not reliable enough to run unattended. Between 0.6 and 0.7 it is deployable for non-safety dimensions but every safety-adjacent verdict is still reviewed. Above 0.7 it can run as a proper regression gate against the anchor set on every prompt change.</p>
+
+<h2>Why raw agreement isn't usable</h2>
+<p>Suppose 90% of scores are correct and a judge marks everything "pass". Against a human expert it agrees on 90 of 100 items, 90% agreement, which reads as excellent, while having caught none of the ten errors, which is the only thing it was built to do. The problem is that agreement includes agreement that would happen by chance, and how much depends on how skewed the labels are.</p>
+
+<p>Cohen's kappa subtracts the chance component:</p>
+<p class="formula">κ = (P₀ − Pₑ) / (1 − Pₑ)</p>
+
+<p>P₀ is observed agreement. Pₑ is expected agreement given each rater's own marginal frequencies. Worked through the example above: the human marks 90 pass and 10 fail, the judge marks 100 pass and 0 fail, so Pₑ = (0.90 × 1.00) + (0.10 × 0.00) = 0.90. Then κ = (0.90 − 0.90) / (1 − 0.90) = 0. Correctly zero.</p>
+
+<p>A judge that catches 6 of the 10 failures and wrongly fails 2 passes gives P₀ = 0.94 and Pₑ = 0.836, so κ = 0.63. Raw agreement moved 90% to 94%. Kappa moved 0 to 0.63. Kappa is far more sensitive to the thing being measured.</p>
+
+<p>Which variant applies where: Cohen's kappa for pairwise comparisons (chemist vs. dermatologist, and so on), Fleiss' kappa for the three-way agreement per dimension, weighted kappa where the ordinal gap matters and a 1-vs-4 disagreement should cost more than a 2-vs-3. Working thresholds: below 0.6 means the rubric is unclear rather than the judge being weak; above 0.7 is deployable as a gate.</p>
+
+<h2>What to do when agreement is low</h2>
+<p>Below-threshold agreement is not fixed by collecting more annotations. It is fixed by putting the raters together and walking every disagreement until the underlying question is resolved. In practice the disagreements are almost never about skincare, they are about the criterion. Does "good for sensitive skin" mean unlikely to irritate, or actively soothing? Does "best in class" mean best available anywhere, or best in this assortment at this price point? Once those are written into the rubric, agreement rises, and the record of those decisions becomes the document that makes the rubric usable by anyone else.</p>
+
+<h2>Calibrating the judge</h2>
+<p>With panel labels in place the sequence is: measure human-human agreement per dimension to establish the ceiling, score the same held-out set with the judge, measure judge-vs-panel kappa and MCC, iterate the judge prompt and re-score the same set, comparing before and after. The few-shot examples inside the judge prompt come from a partition that never appears in the evaluation set. Otherwise the measurement is of memorisation, not generalisation.</p>
+
+<p>The diagnostic value of the first step is the part I most wish I had had earlier. Low human-human agreement is a rubric problem. Low judge-human agreement when human-human agreement is high is a judge problem. Different fixes entirely, and without the first measurement there is no way to tell which one you are looking at.</p>
+
+<h2>Why one rater is imperfect</h2>
+<p>Every human judgment in the first version came from one person, the cosmetic chemist. His judgments were consistent, and having him rather than me adjudicate formulation questions was clearly right. But one rater has structural limitations that took me too long to see.</p>
+
+<p><strong>Rubric ambiguity is indistinguishable from model error.</strong> When he marked a score wrong, there were two possible causes: the model misapplied the rubric, or the rubric did not determine an answer and the model picked a defensible one. With one rater there is no way to tell. A second expert disagreeing with the first, on the same product against the same criteria, is direct evidence that the rubric is underspecified.</p>
+
+<p><strong>There is no measurable ceiling.</strong> An automated judge approximates human judgment, so human agreement bounds what it can achieve. If two experts agree on only 60% of "best in class for dullness" calls, a judge matching them 60% of the time is at ceiling, and further prompt tuning is wasted effort. Without a ceiling I could not distinguish a weak judge from an irreducibly subjective dimension, and I have almost certainly spent time tuning against criteria that were the real problem.</p>
+
+<p><strong>One professional lens is also a systematic filter, not a neutral one.</strong> A formulator evaluates by formulation: actives, concentration, delivery system, pH, supporting ingredients. A dermatologist would weight contraindications, interaction risk, and clinical evidence differently. An experienced consumer would weight texture, finish, and whether the product is pleasant enough to keep using, which is not a soft factor: a well-formulated product abandoned after four days delivers nothing. These lenses disagree in predictable directions, and with one rater the resulting tilt propagates into every calibrated score with nothing to catch it.</p>
+
+<h2>Next iteration: a three-rater panel</h2>
+<p>The next version of the calibration layer replaces the single rater with a panel of three: the chemist, a dermatologist, and an expert consumer, grading a shared set of 30 to 50 products per dimension using the same acceptable or not-acceptable protocol. The panel does not grade the catalogue; it grades a sample that calibrates the automated judge that grades the catalogue.</p>
+
+<p>Adding raters gets me one thing I do not have today: a measured ceiling. Human-human agreement per dimension tells me which dimensions are irreducibly subjective, where the product should express less confidence to the customer, and it lets me distinguish rubric ambiguity from model error by pointing at exactly which criteria the experts themselves cannot resolve consistently. The three-way agreement statistic for this is Fleiss' kappa. The pairwise comparisons, chemist vs. dermatologist and so on, use Cohen's kappa, and that is where the more interesting structure tends to live: they tell you which lenses diverge and on what.</p>
+
+<p class="back"><a href="index.html#eras">← All writing</a></p>
+</div>
+</article>
+
+<script>
+const tt=document.getElementById('themeToggle');
+if(tt){tt.addEventListener('click',()=>{const r=document.documentElement;const n=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}})}
+</script>
+</body>
+</html>
