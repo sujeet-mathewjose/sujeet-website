@@ -316,29 +316,34 @@
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
       <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">B</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">A personal AI operating system</h3>
-        <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · runs every day</p>
-        <div style="margin-top:26px;border:1px solid var(--line);padding:18px">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)">
-            <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:15px">Morning brief</span>
-            <span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3)">06:00 · 18 stories</span>
+        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Hastings, built on OpenClaw</h3>
+        <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · self-hosted · runs every morning</p>
+        <figure style="margin:26px 0 0">
+          <div style="background:var(--shot);padding:12px;border:1px solid var(--line)">
+            <img src="hastings-brief.png" alt="A Telegram thread with a bot called Hastings: a morning brief, then cards for personal mail, LinkedIn, a Berlin to Kochi fare and a news digest, each with drafted replies and inline buttons that turn green as they are tapped" loading="lazy" style="width:100%" />
           </div>
-          <div style="display:flex;align-items:center;gap:16px;padding:11px 0"><span style="font-size:11px;letter-spacing:.12em;color:var(--acc);width:60px;flex:none">AI</span><span style="height:5px;flex:1;background:var(--acc);opacity:.7"></span></div>
-          <div style="display:flex;align-items:center;gap:16px;padding:11px 0"><span style="font-size:11px;letter-spacing:.12em;color:var(--fg3);width:60px;flex:none">TECH</span><span style="height:5px;flex:1;max-width:78%;background:var(--fg3);opacity:.45"></span></div>
-          <div style="display:flex;align-items:center;gap:16px;padding:11px 0"><span style="font-size:11px;letter-spacing:.12em;color:var(--fg3);width:60px;flex:none">BIZ</span><span style="height:5px;flex:1;max-width:62%;background:var(--fg3);opacity:.45"></span></div>
-          <div style="display:flex;align-items:center;gap:16px;padding:11px 0"><span style="font-size:11px;letter-spacing:.12em;color:var(--fg3);width:60px;flex:none">WORLD</span><span style="height:5px;flex:1;max-width:86%;background:var(--fg3);opacity:.45"></span></div>
-          <div style="display:flex;align-items:center;gap:16px;padding:11px 0"><span style="font-size:11px;letter-spacing:.12em;color:var(--fg3);width:60px;flex:none">MKTS</span><span style="height:5px;flex:1;max-width:52%;background:var(--fg3);opacity:.45"></span></div>
-        </div>
+          <figcaption style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-top:9px">The 06:01 thread, as it arrives. Four taps, four actions.</figcaption>
+        </figure>
       </div>
       <div>
         <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
           <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What it does</p>
-          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.5">The layer that makes AI a colleague instead of a chatbot: a global configuration, custom skills for recurring work, and a brief delivered to Telegram before coffee.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Eighteen stories across five categories, researched, deduplicated and summarised overnight.</p>
+          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.5">Hastings is a personal agent that runs on my own machine, on OpenClaw, an open-source gateway that keeps the agent local and connects it to the chat app I already use. No hosted assistant, no data leaving the laptop except the calls it has to make.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">It wakes at six. It reads my personal Gmail, my LinkedIn inbox, a standing fare watch on Berlin to Kochi, and about forty sources across AI, world, India and Germany news. By 06:01 there is one brief in Telegram.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">What I care about is what happens after the brief. Every card carries buttons. Send the drafted reply to the broker in Kochi. Post the LinkedIn response. Arm the fare watch at €470. Write the AI items into my wiki as markdown, cross-linked to the essay draft they contradict. One tap each, from my phone, before I have left the kitchen.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">About 470 items go in on a normal morning and 22 come out. The filtering is the product. Summarising is the easy half.</p>
         </div>
-        <div style="padding:24px 0">
+        <div style="padding:24px 0;border-bottom:1px solid var(--line)">
           <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">My first configuration failed by over-instructing. The version that works is a tenth the length and states durable preferences instead of case handling — it drafts in my register, not an AI's.</p>
+          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Ranking, not retrieval.</strong> Pulling four hundred items and deduplicating them is a weekend problem. Deciding which twelve deserve six minutes of my morning needs a view of what I am working on this week. That is why the wiki feeds back into the ranker instead of only receiving from it. An item is promoted when it touches something already open in my second brain, and an open eval benchmark that contradicts a draft I am writing ranks above a funding round that does not.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Drafting in my register.</strong> The first version wrote replies I would never send. A longer prompt made it worse. What fixed it was giving the agent my sent mail and my own writing rules, then cutting the instructions to a tenth of their length. Durable preferences beat case handling, which is the same lesson my Claude Code configuration taught me.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Fares are a search problem, not a lookup.</strong> Cheapest to Kochi depends on date window, stopover, and how long I am willing to wait for a drop. Hastings keeps a price history per route and only interrupts me when the curve breaks its own trend, which is a very different thing from a fare alert email.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Trust, and the blast radius.</strong> An agent that can post on my behalf can also embarrass me. So the rules are hard-coded and visible in the interface: personal accounts only, work mail never connected, nothing sent without a tap, every action written to a ledger I can read. My Zalando context lives in a separate, air-gapped setup that Hastings has no route to. A capable agent with the wrong permissions is a worse outcome than a dumb one.</p>
+        </div>
+        <div style="padding:24px 0 0">
+          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Where it is going</p>
+          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The news scanner is being widened past RSS into X and YouTube, where most AI news breaks first and where the ratio of noise to substance is worst. After that, a second agent for price comparison across retailers, which is a harder ranking problem than news and closer to my day job.</p>
+          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Listed here as it runs today, with the parts that are still manual left visible.</p>
         </div>
       </div>
     </article>
