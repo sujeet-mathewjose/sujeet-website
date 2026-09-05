@@ -36,6 +36,19 @@
   #theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border:1px solid var(--line);background:none;color:var(--fg);font-family:'Instrument Sans',sans-serif;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:background-color .15s ease,border-color .15s ease;flex:none}
   #theme-toggle:hover{background-color:var(--panel);border-color:var(--fg2)}
 
+  /* ── segmented panes (case-study detail tabs) ── */
+  .panes{display:flex;flex-direction:column}
+  .panes__tabs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .panes__tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--fg3);font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;padding:0 18px 12px 0;margin:0 18px -1px 0;min-height:44px;cursor:pointer;text-align:left;transition:color .18s ease,border-color .18s ease}
+  .panes__tab:hover{color:var(--fg2)}
+  .panes__tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--acc)}
+  .panes__tab:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+  .panes__body{padding:24px 0 0}
+  .panes__pane[hidden]{display:none}
+  .panes__pane{animation:panesFadeIn .22s ease both}
+  @keyframes panesFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.panes__pane{animation:none}}
+
   @media (max-width:640px){
     .hdr-top-row{flex-wrap:wrap;gap:12px !important}
     .hdr-location{white-space:normal !important;text-align:left !important}
@@ -47,6 +60,7 @@
     .case-media{position:static !important;top:auto !important}
     .pov-card{grid-template-columns:auto 1fr !important;row-gap:6px !important}
     .pov-card .pov-read{grid-column:1/-1;justify-self:start !important}
+    .panes__body[style]{min-height:0 !important}
   }
 </style>
 </head>
@@ -71,18 +85,16 @@
         <img class="hdr-photo" src="headshot.jpg" alt="Sujeet Mathew Jose" style="width:clamp(130px,15vw,190px);height:clamp(130px,15vw,190px);border-radius:12px;object-fit:cover;object-position:center 20%;flex:none;border:1px solid var(--line)" />
         <span>
           <span style="display:block;font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,34px);letter-spacing:-.02em;line-height:1.1;margin-bottom:5px">Sujeet Mathew Jose</span>
-          <span style="display:block;font-family:'Fragment Mono',monospace;font-weight:400;font-size:clamp(13px,1.3vw,15px);letter-spacing:.04em;color:var(--fg2);margin-bottom:6px">Product thinker and 12+ years in AI-native shopping experiences.</span>
+          <span style="display:block;font-family:'Fragment Mono',monospace;font-weight:400;font-size:clamp(13px,1.3vw,15px);letter-spacing:.04em;color:var(--fg2);margin-bottom:6px">Product Thinker | e-commerce shopping journey expert | 0–1 Builder in AI-Native Commerce</span>
           <span style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(15px,1.7vw,19px);letter-spacing:-.01em;line-height:1.2">Currently: Principal Product Manager, Zalando Beauty <a href="#work" style="margin-left:14px;font-family:'Fragment Mono',monospace;font-weight:400;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);border-bottom:1px solid var(--acc);padding-bottom:2px;white-space:nowrap">See Projects →</a></span>
         </span>
       </div>
       <span class="hdr-location" style="text-align:right;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);white-space:nowrap">Currently located in: Berlin</span>
     </div>
-    <p style="font-family:'Instrument Sans',sans-serif;font-weight:500;font-size:clamp(13px,1.3vw,16px);letter-spacing:-.01em;color:var(--fg2);margin:clamp(10px,1.6vh,18px) 0 0">Building digital products that keep customer <span style="color:var(--acc)">first</span>.</p>
-
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin:clamp(10px,1.6vh,18px) 0 0">
-      <a href="https://in.linkedin.com/in/sujeetmathew" style="font-size:13px;font-weight:600;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">LinkedIn</a>
-      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:13px;color:var(--acc);border-bottom:1px solid var(--acc)">sujeetmathew@gmail.com</button>
-      <a href="sujeet-jose-cv.pdf" style="font-size:13px;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">CV (PDF)</a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin:clamp(14px,2.2vh,24px) 0 0">
+      <a href="https://in.linkedin.com/in/sujeetmathew" style="font-size:15px;font-weight:600;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">LinkedIn</a>
+      <button type="button" id="copy-email-hero" data-email="sujeetmathew@gmail.com" style="background:none;border:none;padding:0;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:15px;color:var(--acc);border-bottom:1px solid var(--acc)">sujeetmathew@gmail.com</button>
+      <a href="sujeet-jose-cv.pdf" style="font-size:15px;letter-spacing:.02em;border-bottom:1px solid var(--acc);padding-bottom:2px;color:var(--acc)">CV (PDF)</a>
     </div>
 
     <div class="track-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:clamp(10px,1.8vh,20px);border-top:1px solid var(--line)">
@@ -101,7 +113,7 @@
   <section id="work" style="padding:clamp(56px,7vw,110px) clamp(16px,4vw,40px) 0">
     <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)">
       <h2 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:0">Selected work</h2>
-      <p style="margin:0;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)">Company work · what I built / why it was hard / what it moved</p>
+      <p style="margin:0;font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3)">Company work · the feature / complexity / impact</p>
     </div>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0">
@@ -124,27 +136,30 @@
           </figure>
         </div>
       </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What I built</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">An AI-powered skincare recommendation system designed around three increasingly proactive modes: Assurance, Advisor and Anticipator.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Assurance lives on the product page. It evaluates whether the product is a good match for the customer, returns a match or no-match verdict with an explainable rationale, and, when there is a mismatch, recommends better alternatives while using the current product as anchor. Advisor lives on the customer profile. It uses a guided diagnostic to understand skin type, concerns and preferences, then retrieves and ranks the five most relevant products from the wider skincare assortment across seven categories. The next evolution is Anticipator: moving from responding to explicit customer intent toward anticipating relevant skincare needs and surfacing recommendations at the right moment.</p>
+      <div class="panes" data-panes>
+        <div class="panes__tabs" role="tablist" aria-label="Beauty Advisor & Assurance detail">
+          <button class="panes__tab" role="tab" type="button" id="tab-advisor-feature" aria-controls="pane-advisor-feature" aria-selected="true">The Feature</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-advisor-complexity" aria-controls="pane-advisor-complexity" aria-selected="false" tabindex="-1">Complexity</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-advisor-impact" aria-controls="pane-advisor-impact" aria-selected="false" tabindex="-1">Impact</button>
         </div>
-        <div class="why-hard-block" style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Skincare turns recommendation quality into a trust problem. A recommendation cannot simply be relevant — it has to be suitable, explainable and grounded in evidence.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Suitability is multi-dimensional. The system has to reason across skin type, concerns, product attributes, ingredients and customer-review signals, while working with incomplete and inconsistent catalogue data. We built a parallel structured data layer to correct those gaps, then combined retrieval and ranking logic to distinguish between products that may all be individually suitable but differ in relevance for a specific customer. We also designed evals for an asymmetric cost of false positive.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Every recommendation rationale needs to be traceable to product and ingredient evidence rather than generated as marketing copy. In a skin-health category, a plausible but unsupported answer is worse than giving no recommendation at all.</p>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 4px">Impact</p>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">~15%</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">of skincare customers expected to adopt the feature</span>
+        <div class="panes__body" style="min-height:clamp(260px,28vw,320px)">
+          <div class="panes__pane" role="tabpanel" id="pane-advisor-feature" aria-labelledby="tab-advisor-feature" tabindex="0">
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">An AI-powered skincare recommendation system designed around three increasingly proactive modes: Assurance, Advisor and Anticipator.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Assurance evaluates product-customer fit on the product detail page, providing match information with rationale and anchor-based alternatives for mismatches. Advisor sits on customer profiles, using diagnostic inputs to rank the top five products across seven categories. Anticipator proactively predicts skincare needs to deliver timely recommendations rather than relying on explicit intent.</p>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">1.8→2.5x</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">order frequency, the strategy this serves</span>
+          <div class="panes__pane" role="tabpanel" id="pane-advisor-complexity" aria-labelledby="tab-advisor-complexity" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Skincare recommendation quality is a trust problem requiring suitability, explainability, and evidence.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Suitability spans skin type, concerns, product traits, ingredients, and reviews amid inconsistent catalogue data. We built a structured data layer to bridge gaps and combined retrieval-ranking logic to prioritize the most relevant options, complete with evaluations for false-positive risks.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-advisor-impact" aria-labelledby="tab-advisor-impact" tabindex="0" hidden>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:0 0 18px;border-bottom:1px solid var(--line)">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">~15%</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">of skincare customers expected to adopt the feature</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0 0">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">1.8→2.5x</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">order frequency, the strategy this serves</span>
+            </div>
           </div>
         </div>
       </div>
@@ -153,7 +168,7 @@
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
       <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">02</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Beauty on Zalando Assistant</h3>
+        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Evals and RAG training of Beauty on Zalando's conversational commerce</h3>
         <p style="margin:14px 0 0;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Zalando · conversational commerce · live</p>
         <figure style="margin:26px 0 0;max-width:300px">
           <div style="background:var(--shot);padding:10px;border:1px solid var(--line)">
@@ -162,20 +177,26 @@
           <figcaption style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-top:9px">A real beauty query, answered with reasons and products</figcaption>
         </figure>
       </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What I built</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">I adapted the fashion conversational commerce chatbot Zalando Assistant for Beauty. Provided harness to ensure that proper RAG training, access to informational models and ran evals on the feature to ensure a strong clean launch of the feature.</p>
+      <div class="panes" data-panes>
+        <div class="panes__tabs" role="tablist" aria-label="Beauty on Zalando Assistant detail">
+          <button class="panes__tab" role="tab" type="button" id="tab-assistant-feature" aria-controls="pane-assistant-feature" aria-selected="true">The Feature</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-assistant-complexity" aria-controls="pane-assistant-complexity" aria-selected="false" tabindex="-1">Complexity</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-assistant-impact" aria-controls="pane-assistant-impact" aria-selected="false" tabindex="-1">Impact</button>
         </div>
-        <div class="why-hard-block" style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Beauty is a highly technical, personal and risk-prone category to develop a conversational agent in. I had to identify and provide strong guardrails for the project to ensure relevant responses. I also had to understand the architecture of Zalando Assistant and its evals system in detail, to identify points of failure and to provide eval suggestions.</p>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 4px">Impact</p>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">~500k</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">Beauty-relevant conversations in six months</span>
+        <div class="panes__body" style="min-height:clamp(260px,28vw,320px)">
+          <div class="panes__pane" role="tabpanel" id="pane-assistant-feature" aria-labelledby="tab-assistant-feature" tabindex="0">
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Zalando Assistant answers shopping questions in natural language. It was built for fashion. I took it into beauty — a category where "what should I use?" or "does this product fit me?" carries consequence and health risk.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">That meant retrieval over ingredient, suitability and review data the fashion index never held; a routing decision on when the assistant should recommend, ask, or decline; and an eval set of real journeys scored before launch.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-assistant-complexity" aria-labelledby="tab-assistant-complexity" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The failure mode in a general assistant isn't a wrong product. It's a confident answer to a question it should have refused. I mapped where the existing architecture broke under beauty queries, then set the boundary: what it grounds, what it hands off, what it stays quiet on.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Doing that meant learning someone else's system well enough to argue with it — retrieval path, eval harness, failure points — and landing changes through a team that wasn't mine.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-assistant-impact" aria-labelledby="tab-assistant-impact" tabindex="0" hidden>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:0">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">~500k</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">Beauty-relevant conversations in six months</span>
+            </div>
           </div>
         </div>
       </div>
@@ -193,29 +214,33 @@
           <figcaption style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-top:9px">Shipped page · rich content and pairings</figcaption>
         </figure>
       </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What I built</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The page now opens with AI-generated product attributes — skin benefits, sensitivity, the top notes of a perfume — produced at a catalogue scale manual content never reaches.</p>
-          <p style="margin:14px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Around it: curated storytelling for luxury brands, a visual 40+ shade selector in place of a size dropdown, and a How to Apply section the page never had.</p>
+      <div class="panes" data-panes>
+        <div class="panes__tabs" role="tablist" aria-label="Beauty product page, rebuilt detail">
+          <button class="panes__tab" role="tab" type="button" id="tab-pdp-feature" aria-controls="pane-pdp-feature" aria-selected="true">The Feature</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-pdp-complexity" aria-controls="pane-pdp-complexity" aria-selected="false" tabindex="-1">Complexity</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-pdp-impact" aria-controls="pane-pdp-impact" aria-selected="false" tabindex="-1">Impact</button>
         </div>
-        <div class="why-hard-block" style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">374M visits a year, converting at 2.7% against a 3.4% benchmark. The gap was structural: a page built for fashion, used to evaluate beauty. Fixing it meant moving product data, content production, brand, legal and three engineering teams together, on a live surface, and cutting 26 candidate initiatives down to four milestones.</p>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 4px">Impact</p>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">~5%</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">conversion lift across 14 markets</span>
+        <div class="panes__body" style="min-height:clamp(260px,28vw,320px)">
+          <div class="panes__pane" role="tabpanel" id="pane-pdp-feature" aria-labelledby="tab-pdp-feature" tabindex="0">
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The page now opens with AI-generated product attributes — skin benefits, sensitivity, the top notes of a perfume — produced at a catalogue scale manual content never reaches.</p>
+            <p style="margin:14px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Around it: curated storytelling for luxury brands, a visual 40+ shade selector in place of a size dropdown, and a How to Apply section the page never had.</p>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">+8%</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">add-to-wishlist conversion, Beauty Set</span>
+          <div class="panes__pane" role="tabpanel" id="pane-pdp-complexity" aria-labelledby="tab-pdp-complexity" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">374M visits a year, converting at 2.7% against a 3.4% benchmark. The gap was structural: a page built for fashion, used to evaluate beauty. Fixing it meant moving product data, content production, brand, legal and three engineering teams together, on a live surface, and cutting 26 candidate initiatives down to four milestones.</p>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">2 yrs</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">double-digit brand revenue growth, '24–'25</span>
+          <div class="panes__pane" role="tabpanel" id="pane-pdp-impact" aria-labelledby="tab-pdp-impact" tabindex="0" hidden>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:0 0 18px;border-bottom:1px solid var(--line)">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">~5%</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">conversion lift across 14 markets</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">+8%</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">add-to-wishlist conversion, Beauty Set</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0 0">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">2 yrs</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">double-digit brand revenue growth, '24–'25</span>
+            </div>
           </div>
         </div>
       </div>
@@ -234,83 +259,38 @@
           <figcaption style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-top:9px">The customer-facing surface this engine powers</figcaption>
         </figure>
       </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What I built</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">A machine-learning rebuild of the flash sale engine: which products go on sale, how deep the discount runs, and when each slot schedules — across a catalogue of more than a million SKUs.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">It replaced a manual, category-manager-driven process for 300M+ customers.</p>
+      <div class="panes" data-panes>
+        <div class="panes__tabs" role="tablist" aria-label="ML-driven flash sales detail">
+          <button class="panes__tab" role="tab" type="button" id="tab-flash-feature" aria-controls="pane-flash-feature" aria-selected="true">The Feature</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-flash-complexity" aria-controls="pane-flash-complexity" aria-selected="false" tabindex="-1">Complexity</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-flash-impact" aria-controls="pane-flash-impact" aria-selected="false" tabindex="-1">Impact</button>
         </div>
-        <div class="why-hard-block" style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">A flash sale is a multi-objective optimisation — margin against sell-through against traffic — run inside tight time windows across a huge catalogue. Manual curation could not hold all three at once, and the merchandising team had to trust a model with the calls they used to make themselves.</p>
-        </div>
-        <div style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">The redesign, in shape</p>
-          <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:var(--fg2);max-width:52ch">Five structural changes turned a manual, calendar-blind process into one a machine could run — and a human could still steer.</p>
-          <div style="background:var(--panel);border:1px solid var(--line);padding:clamp(16px,2.6vw,22px)">
-            <div style="display:flex;justify-content:space-between;gap:10px;font-family:'Fragment Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--fg3);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:2px">
-              <span>REDESIGN PILLARS</span><span>5 structural changes</span>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)">
-              <span style="width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--acc)"></span>
-              <div style="flex:1;min-width:0">
-                <span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px">Surface</span>
-                <span style="display:block;font-size:14px;line-height:1.35;color:var(--fg)">One unified product feed, not a rigid category grid — with an optional filter, not a fixed structure</span>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)">
-              <span style="width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--acc)"></span>
-              <div style="flex:1;min-width:0">
-                <span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px">Ranking</span>
-                <span style="display:block;font-size:14px;line-height:1.35;color:var(--fg)">Top placement earned by discount depth, not reserved by category — merit over rotation</span>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)">
-              <span style="width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--acc)"></span>
-              <div style="flex:1;min-width:0">
-                <span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px">Ownership</span>
-                <span style="display:block;font-size:14px;line-height:1.35;color:var(--fg)">One accountable coordinator role with explicit CTR, conversion and GMV targets — not a shared, untracked responsibility</span>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)">
-              <span style="width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--acc)"></span>
-              <div style="flex:1;min-width:0">
-                <span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px">Budgeting</span>
-                <span style="display:block;font-size:14px;line-height:1.35;color:var(--fg)">A monthly calendar planned and shared ahead of time, tracked digitally — not discovered after the spend</span>
-              </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0">
-              <span style="width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px;background:var(--coral)"></span>
-              <div style="flex:1;min-width:0">
-                <span style="display:block;font-family:'Fragment Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px">Allocation</span>
-                <span style="display:block;font-size:14px;line-height:1.35;color:var(--fg)">Budget weighted toward what customers actually want on sale, not defaulted to the highest-ticket items</span>
-              </div>
-            </div>
+        <div class="panes__body" style="min-height:clamp(320px,34vw,400px)">
+          <div class="panes__pane" role="tabpanel" id="pane-flash-feature" aria-labelledby="tab-flash-feature" tabindex="0">
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Rebuilt the flash sale engine with machine learning to automate product selection, discount depth, and slot timing across 1M+ SKUs for 300M+ customers.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">To replace the manual system, I introduced five structural changes: switching to a unified product feed, ranking placement by discount depth, assigning single-point ownership with explicit KPI targets, digitizing pre-planned monthly budgets, and allocating spend toward true customer demand over high-ticket items.</p>
           </div>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 4px">Impact</p>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">+5%</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">overall company revenue</span>
+          <div class="panes__pane" role="tabpanel" id="pane-flash-complexity" aria-labelledby="tab-flash-complexity" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Flash sales require multi-objective optimization — balancing margin, sell-through, and traffic within tight timeframes across a massive catalogue. Manual curation could not manage all three parameters simultaneously, requiring us to solve complex algorithmic trade-offs while building merchandising team trust in automated decisions.</p>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">300M+</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">customers reached</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
-            <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">1M+</span>
-            <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">SKUs priced and scheduled automatically</span>
+          <div class="panes__pane" role="tabpanel" id="pane-flash-impact" aria-labelledby="tab-flash-impact" tabindex="0" hidden>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:0 0 18px;border-bottom:1px solid var(--line)">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">+5%</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">overall company revenue</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">300M+</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">customers reached</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:18px 0 0">
+              <span style="font-size:16.5px;line-height:1.6;color:var(--fg2)">1M+</span>
+              <span style="font-size:13px;color:var(--fg3);text-align:right;max-width:26ch">SKUs priced and scheduled automatically</span>
+            </div>
           </div>
         </div>
       </div>
     </article>
   </section>
-
-  <figure id="lab-band" style="margin:0;position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <img src="hero.png" alt="Macro photograph of a silicon wafer, its circuitry catching diffracted light" style="width:100%;aspect-ratio:21/9;object-fit:cover;object-position:center 60%;display:block" />
-    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(0deg, color-mix(in oklab, var(--bg) 55%, transparent), color-mix(in oklab, var(--bg) 25%, transparent))"></div>
-  </figure>
 
   <section id="lab" style="padding:clamp(56px,7vw,110px) clamp(16px,4vw,40px) 0;border-top:1px solid var(--line)">
     <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)">
@@ -321,35 +301,6 @@
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0">
       <div class="case-media" style="position:sticky;top:110px">
         <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">A</p>
-        <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">The Second Brain</h3>
-        <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · LLM-based second brain · daily use</p>
-        <figure style="margin:26px 0 0">
-          <div style="background:var(--shot);padding:12px;border:1px solid var(--line)">
-            <img src="second-brain-diagram.png" alt="Diagram: six signal sources feed a four-layer second brain — daily note, wiki, skills library and a unified LLM context graph — producing draft replies, documents and Jira tickets, which loop back into tomorrow's inputs" loading="lazy" style="width:100%" />
-          </div>
-          <figcaption style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-top:9px">The compounding feedback arc, not a one-way pipeline</figcaption>
-        </figure>
-      </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What it is</p>
-          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.5">I run most of my day through Claude Code, Gmail, Google Chat, meeting notes, Jira, and monthly business reviews. The problem was never capturing any single one of those. It was that they lived in six different places and forgot each other by the next morning.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">So I built a second brain: every signal gets pulled into one Daily Note, cross-linked into a permanent Wiki, and made fully LLM-readable. Claude reads the whole graph — not a folder, not a search index — before it drafts a reply, writes a document, or opens a ticket. Nothing gets re-explained twice.</p>
-        </div>
-        <div style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it earns its place</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The diagram is a hub-and-spoke network, not a pipeline, on purpose. A pipeline implies information moves once, left to right, and is done. This system loops — outputs feed back into the next day's capture — which is the actual point of a second brain: it compounds.</p>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Where it is going</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Built with a small set of Claude Code skills chained together — capture, daily note, wiki, LLM context, drafts, decisions, tickets — running daily. It now answers my chat messages, drafts my emails, and writes management updates tailored to who's asking, among other things.</p>
-        </div>
-      </div>
-    </article>
-
-    <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
-      <div class="case-media" style="position:sticky;top:110px">
-        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">B</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Hastings, built on OpenClaw</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · self-hosted · runs every morning</p>
         <figure style="margin:26px 0 0">
@@ -359,49 +310,54 @@
           <figcaption style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);margin-top:9px">The 06:01 thread, as it arrives. Four taps, four actions.</figcaption>
         </figure>
       </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What it does</p>
-          <p style="margin:0;font-size:clamp(17px,1.5vw,21px);line-height:1.5">Hastings is a personal agent that runs on my own machine, on OpenClaw, an open-source gateway that keeps the agent local and connects it to the chat app I already use. No hosted assistant, no data leaving the laptop except the calls it has to make.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">It wakes at six. It reads my personal Gmail, my LinkedIn inbox, a standing fare watch on Berlin to Kochi, and about forty sources across AI, world, India and Germany news. By 06:01 there is one brief in Telegram.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">What I care about is what happens after the brief. Every card carries buttons. Send the drafted reply to the broker in Kochi. Post the LinkedIn response. Arm the fare watch at €470. Write the AI items into my wiki as markdown, cross-linked to the essay draft they contradict. One tap each, from my phone, before I have left the kitchen.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">About 470 items go in on a normal morning and 22 come out. The filtering is the product. Summarising is the easy half.</p>
+      <div class="panes" data-panes>
+        <div class="panes__tabs" role="tablist" aria-label="Hastings detail">
+          <button class="panes__tab" role="tab" type="button" id="tab-hastings-feature" aria-controls="pane-hastings-feature" aria-selected="true">The Feature</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-hastings-complexity" aria-controls="pane-hastings-complexity" aria-selected="false" tabindex="-1">Complexity</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-hastings-next" aria-controls="pane-hastings-next" aria-selected="false" tabindex="-1">Next steps</button>
         </div>
-        <div style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Ranking, not retrieval.</strong> Pulling four hundred items and deduplicating them is a weekend problem. Deciding which twelve deserve six minutes of my morning needs a view of what I am working on this week. That is why the wiki feeds back into the ranker instead of only receiving from it. An item is promoted when it touches something already open in my second brain, and an open eval benchmark that contradicts a draft I am writing ranks above a funding round that does not.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Drafting in my register.</strong> The first version wrote replies I would never send. A longer prompt made it worse. What fixed it was giving the agent my sent mail and my own writing rules, then cutting the instructions to a tenth of their length. Durable preferences beat case handling, which is the same lesson my Claude Code configuration taught me.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Fares are a search problem, not a lookup.</strong> Cheapest to Kochi depends on date window, stopover, and how long I am willing to wait for a drop. Hastings keeps a price history per route and only interrupts me when the curve breaks its own trend, which is a very different thing from a fare alert email.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Trust, and the blast radius.</strong> An agent that can post on my behalf can also embarrass me. So the rules are hard-coded and visible in the interface: personal accounts only, work mail never connected, nothing sent without a tap, every action written to a ledger I can read. My Zalando context lives in a separate, air-gapped setup that Hastings has no route to. A capable agent with the wrong permissions is a worse outcome than a dumb one.</p>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Where it is going</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The news scanner is being widened past RSS into X and YouTube, where most AI news breaks first and where the ratio of noise to substance is worst. After that, a second agent for price comparison across retailers, which is a harder ranking problem than news and closer to my day job.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Listed here as it runs today, with the parts that are still manual left visible.</p>
+        <div class="panes__body" style="min-height:clamp(340px,38vw,460px)">
+          <div class="panes__pane" role="tabpanel" id="pane-hastings-feature" aria-labelledby="tab-hastings-feature" tabindex="0">
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Hastings is a personal agent that runs on my own machine, built on OpenClaw, an open-source gateway that keeps it local and wired to Telegram. It wakes at six, reads my personal Gmail, my LinkedIn inbox, a fare watch on Berlin to Mumbai and about forty news sources, and has one brief ready by 06:01.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Every card carries buttons. Send the reply to the broker in Kochi. Post the LinkedIn response. Arm the fare watch at €470. File the AI items into my wiki, cross-linked to the essay draft they contradict.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-hastings-complexity" aria-labelledby="tab-hastings-complexity" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Ranking, not retrieval.</strong> Deciding which twelve items deserve six minutes of my morning needs a view of what I am working on this week, so the wiki feeds back into the ranker instead of only receiving from it.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Drafting in my register.</strong> The first version wrote replies I would never send. What fixed it was my sent mail and my own writing rules, then cutting the instructions to a tenth of their length.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Fares are a search problem.</strong> Hastings keeps a price history per route and interrupts me only when the curve breaks its own trend.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)"><strong>Blast radius.</strong> Personal accounts only, work mail never connected, nothing sent without a tap, every action in a ledger I can read. My Zalando context sits in a separate setup Hastings has no route to. A capable agent with the wrong permissions is a worse outcome than a dumb one.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-hastings-next" aria-labelledby="tab-hastings-next" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Widening the scanner past RSS into X and YouTube, where most AI news breaks first. Then price comparison across retailers, a harder ranking problem and closer to my day job.</p>
+          </div>
         </div>
       </div>
     </article>
 
     <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,56px);align-items:start;padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)">
       <div class="case-media" style="position:sticky;top:110px">
-        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">C</p>
+        <p style="font-family:'Instrument Sans',sans-serif;font-weight:800;font-size:clamp(64px,9vw,132px);line-height:.8;letter-spacing:-.05em;margin:0;color:var(--fg3);opacity:.35">B</p>
         <h3 style="font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.035em;line-height:1;margin:18px 0 0">Vantage</h3>
         <p style="margin:14px 0 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)">Personal build · self-hosted · live</p>
       </div>
-      <div>
-        <div style="padding:0 0 24px;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What it is</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Vantage is a small web app I built and deployed myself. It's a chat coach for tech professionals working through a moment where how they come across matters — a promotion interview, a panel, a meeting with senior leadership in an unfamiliar business culture. You tell it what's happening, answer a few quick questions, and it gives you one concrete move for the conversation plus an outfit recommendation tied to your actual situation.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The interesting part is what happens after you close the tab. Sign in again next week and Vantage opens with your name and a reference to what you last talked through, instead of starting over.</p>
+      <div class="panes" data-panes>
+        <div class="panes__tabs" role="tablist" aria-label="Vantage detail">
+          <button class="panes__tab" role="tab" type="button" id="tab-vantage-feature" aria-controls="pane-vantage-feature" aria-selected="true">The Feature</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-vantage-complexity" aria-controls="pane-vantage-complexity" aria-selected="false" tabindex="-1">Complexity</button>
+          <button class="panes__tab" role="tab" type="button" id="tab-vantage-next" aria-controls="pane-vantage-next" aria-selected="false" tabindex="-1">Next steps</button>
         </div>
-        <div style="padding:24px 0;border-bottom:1px solid var(--line)">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">Why it was hard</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Getting the model to output clean, structured data. Vantage pulls facts out of a normal conversation — your role, your name — and writes them to a database. Asking the model for JSON and nothing else sounds simple, but it kept wrapping the JSON in a markdown code block anyway, out of habit. Every extraction silently failed for a while before I noticed, because I'd built it to fail quietly rather than break the conversation. The fix wasn't a better prompt. It was code that strips the wrapper before parsing.</p>
-          <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Deciding what the model is allowed to be confident about. The outfit recommendations were the riskiest part. It would have been easy to have the model suggest a specific product or price, all invented, since there's no live catalogue behind this. The rule I landed on: real, well-known brands as a starting point, never a SKU, a price, or an availability claim. Getting a language model to be useful without quietly overstating what it knows took more work than the feature itself.</p>
-        </div>
-        <div style="padding:24px 0 0">
-          <p style="font-family:'Fragment Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg3);margin:0 0 10px">What I'd do next</p>
-          <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Other use cases for generating executive presence — communication tips, networking topics, meeting tips. A real profile and memory system, recognising when someone's role has actually changed instead of just letting the old answer expire. And a real product catalogue, so the outfit advice can go from "try Uniqlo or COS" to something it can actually point you to.</p>
+        <div class="panes__body" style="min-height:clamp(320px,36vw,420px)">
+          <div class="panes__pane" role="tabpanel" id="pane-vantage-feature" aria-labelledby="tab-vantage-feature" tabindex="0">
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Vantage is a small web app I built and deployed myself. It's a chat coach for tech professionals working through a moment where how they come across matters — a promotion interview, a panel, a meeting with senior leadership in an unfamiliar business culture. You tell it what's happening, answer a few quick questions, and it gives you one concrete move for the conversation plus an outfit recommendation tied to your actual situation.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">The interesting part is what happens after you close the tab. Sign in again next week and Vantage opens with your name and a reference to what you last talked through, instead of starting over.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-vantage-complexity" aria-labelledby="tab-vantage-complexity" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Getting the model to output clean, structured data. Vantage pulls facts out of a normal conversation — your role, your name — and writes them to a database. Asking the model for JSON and nothing else sounds simple, but it kept wrapping the JSON in a markdown code block anyway, out of habit. Every extraction silently failed for a while before I noticed, because I'd built it to fail quietly rather than break the conversation. The fix wasn't a better prompt. It was code that strips the wrapper before parsing.</p>
+            <p style="margin:12px 0 0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Deciding what the model is allowed to be confident about. The outfit recommendations were the riskiest part. It would have been easy to have the model suggest a specific product or price, all invented, since there's no live catalogue behind this. The rule I landed on: real, well-known brands as a starting point, never a SKU, a price, or an availability claim. Getting a language model to be useful without quietly overstating what it knows took more work than the feature itself.</p>
+          </div>
+          <div class="panes__pane" role="tabpanel" id="pane-vantage-next" aria-labelledby="tab-vantage-next" tabindex="0" hidden>
+            <p style="margin:0;font-size:16.5px;line-height:1.6;color:var(--fg2)">Other use cases for generating executive presence — communication tips, networking topics, meeting tips. A real profile and memory system, recognising when someone's role has actually changed instead of just letting the old answer expire. And a real product catalogue, so the outfit advice can go from "try Uniqlo or COS" to something it can actually point you to.</p>
+          </div>
         </div>
       </div>
     </article>
@@ -457,33 +413,21 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,3vw,44px)">
       <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
-        <p style="margin:0;font-size:16.5px;line-height:1.55">"He bridges analytics and storytelling. Synthesising data into clarity has been instrumental in aligning leadership on the proposition's growth."</p>
-        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Principal Product Designer<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Beauty CX · colour picker, VTO, Assurance</span></footer>
-      </blockquote>
-      <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
-        <p style="margin:0;font-size:16.5px;line-height:1.55">"Relentless in iterating on prompts and scoring logic, working closely with engineers until the system was reliable for our users."</p>
-        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Principal Data Scientist<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">LLM research for Beauty personalisation</span></footer>
-      </blockquote>
-      <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
-        <p style="margin:0;font-size:16.5px;line-height:1.55">"He didn't wait for instructions. He aligned commercial and technical teams to keep projects moving, and took over a stalled product to ship it."</p>
-        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Engineering Lead<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Virtual Try-On · app releases</span></footer>
-      </blockquote>
-      <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
         <p style="margin:0;font-size:16.5px;line-height:1.55">"Undoubtedly one of the best PMs I have worked with — complex problems, thorough end-to-end thinking, and a focus on customer experience."</p>
-        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Senior Product Manager<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Former teammate · marketplace</span></footer>
+        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Senior Product Manager<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Former teammate · Blibli.com</span></footer>
       </blockquote>
       <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
-        <p style="margin:0;font-size:16.5px;line-height:1.55">"In-depth assessment of the pros and cons of every initiative, which helped a lot in decision making. A good collaborator, and he coaches other teams too."</p>
-        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">SVP, Seller Sales &amp; Operations<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Marketplace leadership</span></footer>
+        <p style="margin:0;font-size:16.5px;line-height:1.55">"Understands the business needs and demands well. Performs in-depth assessment of the pros and cons of every initiative, which helped a lot in decision making. A good collaborator, and works well with other teams too."</p>
+        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">SVP, Seller Sales &amp; Operations<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Blibli.com Leadership</span></footer>
       </blockquote>
       <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
-        <p style="margin:0;font-size:16.5px;line-height:1.55">"His solutions are simple, elegant and effective, and his vision for the product is always clear. He never backs down from a challenge."</p>
-        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Product Lead, Payments<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Promotions product redesign</span></footer>
+        <p style="margin:0;font-size:16.5px;line-height:1.55">"Relentless in optimizing the harness for the skincare personalization project. He reworked on prompts and scoring logic, working closely with engineers until the system was reliable for our users."</p>
+        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Principal Engineer<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">Zalando Beauty</span></footer>
       </blockquote>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,44px);margin-top:clamp(36px,5vw,68px);padding-top:24px;border-top:1px solid var(--line)">
-      <p style="margin:0;flex:1 1 300px;font-size:16.5px;line-height:1.55;color:var(--fg2)">"He has a giver's attitude and genuinely wants to see you grow professionally, which makes him a great mentor."<span style="display:block;margin-top:14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Co-President, MBA Tech Club · RSM Erasmus</span></p>
-      <p style="margin:0;flex:1 1 220px;font-size:15px;line-height:1.6;color:var(--fg3)">Also a Product School webinar host on PM–designer collaboration, and a mentor on Topmate. Teaching keeps the thinking honest.</p>
+      <blockquote style="margin:0;border-top:1px solid var(--line);padding-top:20px">
+        <p style="margin:0;font-size:16.5px;line-height:1.55">"He has a giver's attitude and genuinely wants to see you grow professionally, which makes him a great mentor."</p>
+        <footer style="margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg3)">Co-President, MBA Tech Club<span style="display:block;margin-top:5px;letter-spacing:.1em;color:var(--acc)">RSM Erasmus</span></footer>
+      </blockquote>
     </div>
   </section>
 
@@ -553,6 +497,33 @@
     video.pause();
     video.removeAttribute('autoplay');
   }
+})();
+
+/* ── segmented panes: tab switching, works for any [data-panes] block ── */
+(function(){
+  document.querySelectorAll('[data-panes]').forEach(function (root) {
+    const tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+
+    function select(i, focus){
+      tabs.forEach(function (tab, j) {
+        const on = i === j;
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.tabIndex = on ? 0 : -1;
+        document.getElementById(tab.getAttribute('aria-controls')).hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(i); });
+      tab.addEventListener('keydown', function (e) {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        select((i + d + tabs.length) % tabs.length, true);
+      });
+    });
+  });
 })();
 
 </script>
